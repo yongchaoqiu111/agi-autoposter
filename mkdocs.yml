@@ -1,0 +1,78 @@
+site_name: "三层结构体：工业级 AI 任务架构"
+site_description: "稳定优先 × 可控执行 × 原子化组合"
+site_author: "Chaseqiu"
+site_url: "https://yongchaoqiu111.github.io/agi-autoposter/"
+repo_url: "https://github.com/yongchaoqiu111/agi-autoposter"
+repo_name: "agi-autoposter"
+
+docs_dir: .
+
+theme:
+  name: material
+  language: zh
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.expand
+    - navigation.indexes
+    - navigation.top
+    - search.highlight
+    - search.share
+    - content.code.copy
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Noto Sans SC
+    code: Fira Code
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+
+nav:
+  - 首页: index.md
+  - 序言: 00-preface.md
+  - 第一部分：问题:
+    - 第 1 章 AI Agent 的进化迷思: 01-chapter1.md
+    - 第 2 章 为什么现有框架不稳定: 02-chapter2.md
+    - 第 3 章 工业级系统真正需要什么: 03-chapter3.md
+  - 第二部分：架构:
+    - 第 4 章 三层结构体定义: 04-chapter4.md
+    - 第 5 章 原子特性: 05-chapter5.md
+    - 第 6 章 分身调度机制: 06-chapter6.md
+    - 第 7 章 原子的组合规则: 07-chapter7.md
+    - 第 8 章 监督层: 08-chapter8.md
+    - 第 9 章 幻觉的层层过滤: 09-chapter9.md
+    - 第 10 章 可控执行: 10-chapter10.md
+  - 第三部分：边界:
+    - 第 11 章 能力边界: 11-chapter11.md
+    - 第 12 章 与现有框架对比: 12-chapter12.md
+    - 第 13 章 什么时候用这套架构: 13-chapter13.md
+  - 第四部分：落地:
+    - 第 14 章 当前阶段: 14-chapter14.md
+    - 第 15 章 生产环境部署: 15-chapter15.md
+    - 第 16 章 探索能力: 16-chapter16.md
+    - 第 17 章 架构的未来: 17-chapter17.md
+  - 附录: appendix.md

@@ -1,0 +1,2129 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Stability First x Controlled Execution x Atomic Composition">
+      
+      
+        <meta name="author" content="Chaseqiu">
+      
+      
+        <link rel="canonical" href="https://yongchaoqiu111.github.io/agi-autoposter/en/10-chapter10/">
+      
+      
+        <link rel="prev" href="../09-chapter9/">
+      
+      
+        <link rel="next" href="../11-chapter11/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Chapter 10: Controlled Execution - Three-Layer Architecture: Industrial-Grade AI Task Architecture</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-10-controlled-execution-complete" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Three-Layer Architecture: Industrial-Grade AI Task Architecture" class="md-header__button md-logo" aria-label="Three-Layer Architecture: Industrial-Grade AI Task Architecture" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Three-Layer Architecture: Industrial-Grade AI Task Architecture
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter 10: Controlled Execution
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yongchaoqiu111/agi-autoposter" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    agi-autoposter
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Three-Layer Architecture: Industrial-Grade AI Task Architecture" class="md-nav__button md-logo" aria-label="Three-Layer Architecture: Industrial-Grade AI Task Architecture" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Three-Layer Architecture: Industrial-Grade AI Task Architecture
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yongchaoqiu111/agi-autoposter" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    agi-autoposter
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Preface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part I: The Problem
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part I: The Problem
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-chapter1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 1: The Evolution Myth
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-chapter2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 2: Why Existing Frameworks Are Unstable
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-chapter3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 3: What Industrial Systems Really Need
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part II: Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part II: Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-chapter4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 4: Three-Layer Structure Definition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-chapter5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 5: Atomic Characteristics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-chapter6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 6: Clone Scheduling Mechanism
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-chapter7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 7: Composition Rules of Atoms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-chapter8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 8: Supervision Layer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-chapter9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 9: Layer-by-Layer Hallucination Filtering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 10: Controlled Execution
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 10: Controlled Execution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#101-what-is-controlled-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 What Is Controlled Execution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#102-controlled-execution-vs-autonomous-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Controlled Execution vs. Autonomous Execution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#103-controlled-execution-core-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Controlled Execution Core Principles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.3 Controlled Execution Core Principles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1031-predictability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3.1 Predictability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1032-traceability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3.2 Traceability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1033-isolatability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3.3 Isolatability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1034-recoverability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3.4 Recoverability
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#104-controlled-execution-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4 Controlled Execution Implementation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.4 Controlled Execution Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1041-task-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4.1 Task Lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1042-timeout-kill-mechanism" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4.2 Timeout Kill Mechanism
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1043-retry-mechanism" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4.3 Retry Mechanism
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1044-manual-intervention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4.4 Manual Intervention
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#105-controlled-execution-and-observability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5 Controlled Execution and Observability
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#106-controlled-execution-and-controllability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.6 Controlled Execution and Controllability
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#107-controlled-execution-and-responsibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.7 Controlled Execution and Responsibility
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#108-controlled-execution-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8 Controlled Execution Best Practices
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.8 Controlled Execution Best Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1081-start-small" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8.1 Start Small
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1082-monitor-everything" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8.2 Monitor Everything
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1083-set-alerts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8.3 Set Alerts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1084-regular-review" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8.4 Regular Review
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#109-controlled-execution-anti-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.9 Controlled Execution Anti-Patterns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.9 Controlled Execution Anti-Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1091-over-automation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.9.1 Over-Automation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1092-ignoring-alerts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.9.2 Ignoring Alerts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1093-no-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.9.3 No Testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1094-no-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.9.4 No Documentation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1010-controlled-execution-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.10 Controlled Execution Checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1011-controlled-execution-self-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.11 Controlled Execution Self-Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chapter Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part III: Boundaries
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part III: Boundaries
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-chapter11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 11: Capability Boundaries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-chapter12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 12: Comparison with Existing Frameworks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-chapter13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 13: When to Use This Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part IV: Implementation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part IV: Implementation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-chapter14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 14: Current Stage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-chapter15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 15: Production Deployment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16-chapter16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 16: Exploration Capability
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17-chapter17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 17: Future of the Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#101-what-is-controlled-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 What Is Controlled Execution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#102-controlled-execution-vs-autonomous-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Controlled Execution vs. Autonomous Execution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#103-controlled-execution-core-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Controlled Execution Core Principles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.3 Controlled Execution Core Principles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1031-predictability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3.1 Predictability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1032-traceability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3.2 Traceability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1033-isolatability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3.3 Isolatability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1034-recoverability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3.4 Recoverability
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#104-controlled-execution-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4 Controlled Execution Implementation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.4 Controlled Execution Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1041-task-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4.1 Task Lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1042-timeout-kill-mechanism" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4.2 Timeout Kill Mechanism
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1043-retry-mechanism" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4.3 Retry Mechanism
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1044-manual-intervention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4.4 Manual Intervention
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#105-controlled-execution-and-observability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5 Controlled Execution and Observability
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#106-controlled-execution-and-controllability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.6 Controlled Execution and Controllability
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#107-controlled-execution-and-responsibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.7 Controlled Execution and Responsibility
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#108-controlled-execution-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8 Controlled Execution Best Practices
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.8 Controlled Execution Best Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1081-start-small" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8.1 Start Small
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1082-monitor-everything" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8.2 Monitor Everything
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1083-set-alerts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8.3 Set Alerts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1084-regular-review" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8.4 Regular Review
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#109-controlled-execution-anti-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.9 Controlled Execution Anti-Patterns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.9 Controlled Execution Anti-Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1091-over-automation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.9.1 Over-Automation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1092-ignoring-alerts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.9.2 Ignoring Alerts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1093-no-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.9.3 No Testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1094-no-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.9.4 No Documentation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1010-controlled-execution-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.10 Controlled Execution Checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1011-controlled-execution-self-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.11 Controlled Execution Self-Assessment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chapter Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="chapter-10-controlled-execution-complete">Chapter 10: Controlled Execution (Complete)<a class="headerlink" href="#chapter-10-controlled-execution-complete" title="Permanent link">&para;</a></h1>
+<h2 id="101-what-is-controlled-execution">10.1 What Is Controlled Execution<a class="headerlink" href="#101-what-is-controlled-execution" title="Permanent link">&para;</a></h2>
+<p>Controlled execution means:</p>
+<ul>
+<li>Every step is predictable</li>
+<li>Every operation is traceable</li>
+<li>Every error is isolatable</li>
+<li>Every state is queryable</li>
+</ul>
+<p><strong>Controlled execution is the core of industrial-grade systems.</strong></p>
+<h2 id="102-controlled-execution-vs-autonomous-execution">10.2 Controlled Execution vs. Autonomous Execution<a class="headerlink" href="#102-controlled-execution-vs-autonomous-execution" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Autonomous Execution</th>
+<th>Controlled Execution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Decision</td>
+<td>AI decides</td>
+<td>Human defines rules, AI executes</td>
+</tr>
+<tr>
+<td>Process</td>
+<td>Unpredictable</td>
+<td>Predictable</td>
+</tr>
+<tr>
+<td>Error</td>
+<td>AI self-heals</td>
+<td>Record, isolate, manual intervention</td>
+</tr>
+<tr>
+<td>Trace</td>
+<td>Difficult to trace</td>
+<td>Full traceability</td>
+</tr>
+<tr>
+<td>Responsibility</td>
+<td>Unclear</td>
+<td>Clear</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Industrial-grade systems choose controlled execution.</strong></p>
+<h2 id="103-controlled-execution-core-principles">10.3 Controlled Execution Core Principles<a class="headerlink" href="#103-controlled-execution-core-principles" title="Permanent link">&para;</a></h2>
+<h3 id="1031-predictability">10.3.1 Predictability<a class="headerlink" href="#1031-predictability" title="Permanent link">&para;</a></h3>
+<p>You know what the system is doing, you know why it does it, you know what it will do next.</p>
+<h3 id="1032-traceability">10.3.2 Traceability<a class="headerlink" href="#1032-traceability" title="Permanent link">&para;</a></h3>
+<p>All operations have logs, all states are queryable, all errors are traceable.</p>
+<h3 id="1033-isolatability">10.3.3 Isolatability<a class="headerlink" href="#1033-isolatability" title="Permanent link">&para;</a></h3>
+<p>One task fails, does not affect other tasks. Failure is isolated within a single atom.</p>
+<h3 id="1034-recoverability">10.3.4 Recoverability<a class="headerlink" href="#1034-recoverability" title="Permanent link">&para;</a></h3>
+<p>After failure, you can retry, you can roll back, you can manually intervene.</p>
+<h2 id="104-controlled-execution-implementation">10.4 Controlled Execution Implementation<a class="headerlink" href="#104-controlled-execution-implementation" title="Permanent link">&para;</a></h2>
+<h3 id="1041-task-lifecycle">10.4.1 Task Lifecycle<a class="headerlink" href="#1041-task-lifecycle" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pending -&gt; running -&gt; success
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>                    -&gt; failure
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>                    -&gt; timeout
+</code></pre></div>
+<h3 id="1042-timeout-kill-mechanism">10.4.2 Timeout Kill Mechanism<a class="headerlink" href="#1042-timeout-kill-mechanism" title="Permanent link">&para;</a></h3>
+<p>Every task has a timeout limit. After timeout, the task is forcibly terminated.</p>
+<p>Why is this necessary?</p>
+<ul>
+<li>Just marking timeout, the process may still be running in the background</li>
+<li>Resource leakage (connections, memory, file handles)</li>
+<li>May affect other tasks</li>
+</ul>
+<p><strong>Timeout must be forcibly terminated, not just "marked as failed."</strong></p>
+<h3 id="1043-retry-mechanism">10.4.3 Retry Mechanism<a class="headerlink" href="#1043-retry-mechanism" title="Permanent link">&para;</a></h3>
+<p>After failure, tasks can be retried, but:</p>
+<ul>
+<li>Retry count is limited (e.g., max 3 times)</li>
+<li>Retry interval increases (1s, 2s, 4s, 8s...)</li>
+<li>Retry failure is recorded and alerted</li>
+</ul>
+<h3 id="1044-manual-intervention">10.4.4 Manual Intervention<a class="headerlink" href="#1044-manual-intervention" title="Permanent link">&para;</a></h3>
+<p>When automatic retry fails, manual intervention is required:</p>
+<ul>
+<li>Pause the task</li>
+<li>Check the error</li>
+<li>Manually fix or confirm</li>
+<li>Resume execution</li>
+</ul>
+<h2 id="105-controlled-execution-and-observability">10.5 Controlled Execution and Observability<a class="headerlink" href="#105-controlled-execution-and-observability" title="Permanent link">&para;</a></h2>
+<p>Controlled execution requires observability:</p>
+<ul>
+<li><strong>Logs</strong>: What happened</li>
+<li><strong>Metrics</strong>: How is it performing</li>
+<li><strong>Traces</strong>: Where did it go</li>
+</ul>
+<p>The supervision layer provides all three.</p>
+<h2 id="106-controlled-execution-and-controllability">10.6 Controlled Execution and Controllability<a class="headerlink" href="#106-controlled-execution-and-controllability" title="Permanent link">&para;</a></h2>
+<p>With controlled execution, you can:</p>
+<ul>
+<li><strong>Pause</strong>: Stop all new tasks</li>
+<li><strong>Resume</strong>: Continue execution</li>
+<li><strong>Retry</strong>: Retry failed tasks</li>
+<li><strong>Kill</strong>: Force terminate stuck tasks</li>
+<li><strong>Rollback</strong>: Roll back to a previous state</li>
+</ul>
+<h2 id="107-controlled-execution-and-responsibility">10.7 Controlled Execution and Responsibility<a class="headerlink" href="#107-controlled-execution-and-responsibility" title="Permanent link">&para;</a></h2>
+<p>Controlled execution makes responsibility clear:</p>
+<ul>
+<li>Large model problem: Hallucination, wrong selection</li>
+<li>Tool problem: API error, network error</li>
+<li>Configuration problem: Wrong parameters, wrong time</li>
+<li>System problem: Resource exhaustion, timeout</li>
+</ul>
+<p><strong>Clear responsibility means you can improve.</strong></p>
+<h2 id="108-controlled-execution-best-practices">10.8 Controlled Execution Best Practices<a class="headerlink" href="#108-controlled-execution-best-practices" title="Permanent link">&para;</a></h2>
+<h3 id="1081-start-small">10.8.1 Start Small<a class="headerlink" href="#1081-start-small" title="Permanent link">&para;</a></h3>
+<p>Start with a single atom, validate stability, then expand.</p>
+<h3 id="1082-monitor-everything">10.8.2 Monitor Everything<a class="headerlink" href="#1082-monitor-everything" title="Permanent link">&para;</a></h3>
+<p>All tasks must be recorded in the supervision layer.</p>
+<h3 id="1083-set-alerts">10.8.3 Set Alerts<a class="headerlink" href="#1083-set-alerts" title="Permanent link">&para;</a></h3>
+<p>Set thresholds for failure rate, timeout rate, etc.</p>
+<p><strong>Principle: Audit logs should be immutable.</strong></p>
+<h3 id="1084-regular-review">10.8.4 Regular Review<a class="headerlink" href="#1084-regular-review" title="Permanent link">&para;</a></h3>
+<p>Regularly review task logs, find patterns, optimize.</p>
+<h2 id="109-controlled-execution-anti-patterns">10.9 Controlled Execution Anti-Patterns<a class="headerlink" href="#109-controlled-execution-anti-patterns" title="Permanent link">&para;</a></h2>
+<h3 id="1091-over-automation">10.9.1 Over-Automation<a class="headerlink" href="#1091-over-automation" title="Permanent link">&para;</a></h3>
+<p>Not everything should be automated. Some decisions require human sign-off.</p>
+<h3 id="1092-ignoring-alerts">10.9.2 Ignoring Alerts<a class="headerlink" href="#1092-ignoring-alerts" title="Permanent link">&para;</a></h3>
+<p>Alerts are there for a reason. Ignoring them will cause bigger problems.</p>
+<h3 id="1093-no-testing">10.9.3 No Testing<a class="headerlink" href="#1093-no-testing" title="Permanent link">&para;</a></h3>
+<p>Do not deploy directly to production. Test first, then deploy.</p>
+<h3 id="1094-no-documentation">10.9.4 No Documentation<a class="headerlink" href="#1094-no-documentation" title="Permanent link">&para;</a></h3>
+<p>Document all configurations, all changes, all incidents.</p>
+<h2 id="1010-controlled-execution-checklist">10.10 Controlled Execution Checklist<a class="headerlink" href="#1010-controlled-execution-checklist" title="Permanent link">&para;</a></h2>
+<ul>
+<li>[ ] All tasks have timeouts</li>
+<li>[ ] All tasks have retry limits</li>
+<li>[ ] All tasks are recorded in the supervision layer</li>
+<li>[ ] Alerts are set</li>
+<li>[ ] Manual intervention process is defined</li>
+<li>[ ] Logs are immutable</li>
+<li>[ ] Regular review process is in place</li>
+</ul>
+<h2 id="1011-controlled-execution-self-assessment">10.11 Controlled Execution Self-Assessment<a class="headerlink" href="#1011-controlled-execution-self-assessment" title="Permanent link">&para;</a></h2>
+<p>Ask yourself these questions:</p>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Yes/No</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Can you see what tasks are running?</td>
+<td></td>
+</tr>
+<tr>
+<td>Can you see which tasks succeeded or failed?</td>
+<td></td>
+</tr>
+<tr>
+<td>Can you see why tasks failed?</td>
+<td></td>
+</tr>
+<tr>
+<td>Can you pause all tasks?</td>
+<td></td>
+</tr>
+<tr>
+<td>Can you retry failed tasks?</td>
+<td></td>
+</tr>
+<tr>
+<td>Can you force terminate stuck tasks?</td>
+<td></td>
+</tr>
+<tr>
+<td>Are failures isolated? Are timeouts enforced?</td>
+<td></td>
+</tr>
+<tr>
+<td>Is responsibility clear?</td>
+<td></td>
+</tr>
+<tr>
+<td>Can you defend?</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>If you cannot answer "yes" to all questions, your system is not "controlled."</p>
+<hr />
+<h2 id="chapter-summary">Chapter Summary<a class="headerlink" href="#chapter-summary" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Principle</th>
+<th>Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Predictability</td>
+<td>Every step is predictable</td>
+</tr>
+<tr>
+<td>Traceability</td>
+<td>All operations have logs</td>
+</tr>
+<tr>
+<td>Isolatability</td>
+<td>Failure is isolated within a single atom</td>
+</tr>
+<tr>
+<td>Recoverability</td>
+<td>Can retry, roll back, manually intervene</td>
+</tr>
+<tr>
+<td>Clear responsibility</td>
+<td>Can find the root cause</td>
+</tr>
+</tbody>
+</table>
+<p><em>One-sentence summary: Controlled execution = predictability + traceability + isolatability + recoverability + clear responsibility.</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.expand", "navigation.indexes", "navigation.top", "search.highlight", "search.share", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

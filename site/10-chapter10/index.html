@@ -1,0 +1,2920 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="稳定优先 × 可控执行 × 原子化组合">
+      
+      
+        <meta name="author" content="Chaseqiu">
+      
+      
+      
+        <link rel="prev" href="../09-chapter9/">
+      
+      
+        <link rel="next" href="../11-chapter11/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>第 10 章 可控执行 - 三层结构体：工业级 AI 任务架构</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans SC";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#10" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href=".." title="三层结构体：工业级 AI 任务架构" class="md-header__button md-logo" aria-label="三层结构体：工业级 AI 任务架构" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            三层结构体：工业级 AI 任务架构
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第 10 章 可控执行
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yongchaoqiu111/agi-autoposter" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    agi-autoposter
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="三层结构体：工业级 AI 任务架构" class="md-nav__button md-logo" aria-label="三层结构体：工业级 AI 任务架构" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    三层结构体：工业级 AI 任务架构
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yongchaoqiu111/agi-autoposter" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    agi-autoposter
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    序言
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一部分：问题
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第一部分：问题
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-chapter1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 1 章 AI Agent 的进化迷思
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-chapter2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 2 章 为什么现有框架不稳定
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-chapter3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 3 章 工业级系统真正需要什么
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二部分：架构
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第二部分：架构
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-chapter4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 4 章 三层结构体定义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-chapter5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 5 章 原子特性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-chapter6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 6 章 分身调度机制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-chapter7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 7 章 原子的组合规则
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-chapter8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 8 章 监督层
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-chapter9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 9 章 幻觉的层层过滤
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 10 章 可控执行
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 10 章 可控执行
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#101" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 什么是"可控执行"
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#102" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 任务队列：有序是可控的前提
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.2 任务队列：有序是可控的前提">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1021" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2.1 为什么需要队列
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1022" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2.2 队列的设计原则
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1023" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2.3 平台隔离队列
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#103" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 并发控制：不能太多，也不能太少
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.3 并发控制：不能太多，也不能太少">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1031" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3.1 为什么要控制并发
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1032" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3.2 并发数的设定原则
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1033" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3.3 动态调整机制
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#104" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4 超时强杀：不能让任务永远卡住
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.4 超时强杀：不能让任务永远卡住">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1041" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4.1 为什么需要超时
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1042" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4.2 超时时间的设定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1043" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4.3 强杀机制
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#105" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5 失败重试：不能一次失败就放弃
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.5 失败重试：不能一次失败就放弃">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1051" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5.1 重试策略
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1052" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5.2 什么错误应该重试
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1053" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5.3 重试的代码实现
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#106" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.6 限流与间隔：保护账号不被封
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.6 限流与间隔：保护账号不被封">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1061" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.6.1 为什么需要限流
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1062" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.6.2 间隔控制的实现
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1063" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.6.3 动态间隔
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#107" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.7 状态管理：每个任务都要有"户口"
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.7 状态管理：每个任务都要有&#34;户口&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1071" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.7.1 任务的生命周期
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1072" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.7.2 任务需要记录的信息
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1073" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.7.3 状态存储
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#108" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8 日志与审计：出了事能找到原因
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.8 日志与审计：出了事能找到原因">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1081" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8.1 日志分级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1082" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8.2 必须记录的关键事件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1083" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8.3 审计日志的格式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#109" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.9 异常隔离：一个任务失败不影响其他
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.9 异常隔离：一个任务失败不影响其他">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1091" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.9.1 隔离原则
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1092" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.9.2 隔离机制
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1093" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.9.3 失败扩散的防护
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1010" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.10 人工介入机制：系统不能完全无人值守
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.10 人工介入机制：系统不能完全无人值守">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#10101" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.10.1 什么时候需要人工介入
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10102" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.10.2 介入方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10103" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.10.3 告警阈值示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1011" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.11 可控执行的完整检查清单
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1012" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.12 本章小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三部分：边界
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第三部分：边界
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-chapter11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 11 章 能力边界
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-chapter12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 12 章 与现有框架对比
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-chapter13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 13 章 什么时候用这套架构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四部分：落地
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第四部分：落地
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-chapter14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 14 章 当前阶段
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-chapter15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 15 章 生产环境部署
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16-chapter16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 16 章 探索能力
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17-chapter17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 17 章 架构的未来
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#101" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 什么是"可控执行"
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#102" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 任务队列：有序是可控的前提
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.2 任务队列：有序是可控的前提">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1021" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2.1 为什么需要队列
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1022" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2.2 队列的设计原则
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1023" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2.3 平台隔离队列
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#103" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 并发控制：不能太多，也不能太少
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.3 并发控制：不能太多，也不能太少">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1031" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3.1 为什么要控制并发
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1032" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3.2 并发数的设定原则
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1033" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3.3 动态调整机制
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#104" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4 超时强杀：不能让任务永远卡住
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.4 超时强杀：不能让任务永远卡住">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1041" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4.1 为什么需要超时
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1042" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4.2 超时时间的设定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1043" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4.3 强杀机制
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#105" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5 失败重试：不能一次失败就放弃
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.5 失败重试：不能一次失败就放弃">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1051" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5.1 重试策略
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1052" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5.2 什么错误应该重试
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1053" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5.3 重试的代码实现
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#106" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.6 限流与间隔：保护账号不被封
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.6 限流与间隔：保护账号不被封">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1061" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.6.1 为什么需要限流
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1062" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.6.2 间隔控制的实现
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1063" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.6.3 动态间隔
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#107" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.7 状态管理：每个任务都要有"户口"
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.7 状态管理：每个任务都要有&#34;户口&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1071" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.7.1 任务的生命周期
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1072" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.7.2 任务需要记录的信息
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1073" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.7.3 状态存储
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#108" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8 日志与审计：出了事能找到原因
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.8 日志与审计：出了事能找到原因">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1081" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8.1 日志分级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1082" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8.2 必须记录的关键事件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1083" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8.3 审计日志的格式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#109" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.9 异常隔离：一个任务失败不影响其他
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.9 异常隔离：一个任务失败不影响其他">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1091" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.9.1 隔离原则
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1092" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.9.2 隔离机制
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1093" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.9.3 失败扩散的防护
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1010" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.10 人工介入机制：系统不能完全无人值守
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.10 人工介入机制：系统不能完全无人值守">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#10101" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.10.1 什么时候需要人工介入
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10102" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.10.2 介入方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10103" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.10.3 告警阈值示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1011" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.11 可控执行的完整检查清单
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1012" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.12 本章小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="10">第 10 章 可控执行（完整版）<a class="headerlink" href="#10" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="101">10.1 什么是"可控执行"<a class="headerlink" href="#101" title="Permanent link">&para;</a></h2>
+<p>可控执行不是"不出错"，而是：</p>
+<blockquote>
+<p>出错的时候，你能知道、能追溯、能补救、能防止扩散。</p>
+</blockquote>
+<p>可控执行包含五个维度：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>可观测</td>
+<td>所有状态都能看到</td>
+</tr>
+<tr>
+<td>可追溯</td>
+<td>每个操作都能找到责任人</td>
+</tr>
+<tr>
+<td>可干预</td>
+<td>出问题时能手动介入</td>
+</tr>
+<tr>
+<td>可恢复</td>
+<td>失败后能自动/手动恢复</td>
+</tr>
+<tr>
+<td>可防御</td>
+<td>异常被隔离，不扩散</td>
+</tr>
+</tbody>
+</table>
+<p>这五个维度，缺一不可。</p>
+<hr />
+<h2 id="102">10.2 任务队列：有序是可控的前提<a class="headerlink" href="#102" title="Permanent link">&para;</a></h2>
+<h3 id="1021">10.2.1 为什么需要队列<a class="headerlink" href="#1021" title="Permanent link">&para;</a></h3>
+<p>如果没有队列：</p>
+<ul>
+<li>任务同时涌入，系统瞬间过载</li>
+<li>无法控制任务顺序</li>
+<li>无法限制并发数</li>
+<li>无法实现"同平台间隔"</li>
+</ul>
+<p><strong>队列的本质：把"无序的请求"变成"有序的执行"。</strong></p>
+<h3 id="1022">10.2.2 队列的设计原则<a class="headerlink" href="#1022" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>原则</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FIFO</td>
+<td>先来先服务，公平</td>
+</tr>
+<tr>
+<td>优先级队列</td>
+<td>重要任务可以插队</td>
+</tr>
+<tr>
+<td>平台隔离</td>
+<td>每个平台独立队列</td>
+</tr>
+<tr>
+<td>持久化</td>
+<td>队列不丢任务</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1023">10.2.3 平台隔离队列<a class="headerlink" href="#1023" title="Permanent link">&para;</a></h3>
+<p>每个平台有自己独立的任务队列：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>抖音队列：   [任务1] [任务4] [任务7] → 串行执行
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Facebook队列：[任务2] [任务5] → 串行执行
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>TikTok队列： [任务3] [任务6] [任务8] → 串行执行
+</code></pre></div>
+<p>好处：</p>
+<ul>
+<li>同平台任务自动排队，不会触发限流</li>
+<li>不同平台可以并发执行</li>
+<li>一个平台卡住，不影响其他平台</li>
+</ul>
+<hr />
+<h2 id="103">10.3 并发控制：不能太多，也不能太少<a class="headerlink" href="#103" title="Permanent link">&para;</a></h2>
+<h3 id="1031">10.3.1 为什么要控制并发<a class="headerlink" href="#1031" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>并发数过低</th>
+<th>并发数过高</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>任务排队久</td>
+<td>系统过载</td>
+</tr>
+<tr>
+<td>资源浪费</td>
+<td>触发平台限流</td>
+</tr>
+<tr>
+<td>处理慢</td>
+<td>容易出错</td>
+</tr>
+</tbody>
+</table>
+<p><strong>目标：找到适合你场景的"最优并发数"。</strong></p>
+<h3 id="1032">10.3.2 并发数的设定原则<a class="headerlink" href="#1032" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>推荐并发数</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单账号</td>
+<td>1-3</td>
+<td>防止平台封号</td>
+</tr>
+<tr>
+<td>多账号同一平台</td>
+<td>3-5</td>
+<td>各账号独立，可适当并发</td>
+</tr>
+<tr>
+<td>多平台混跑</td>
+<td>5-10</td>
+<td>平台间无冲突</td>
+</tr>
+<tr>
+<td>高合规场景</td>
+<td>1</td>
+<td>宁可慢，不可错</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1033">10.3.3 动态调整机制<a class="headerlink" href="#1033" title="Permanent link">&para;</a></h3>
+<p>系统可以基于历史数据自动调整并发数：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>if 最近失败率 &gt; 10%:
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    并发数减半
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>elif 队列长度 &gt; 100:
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    并发数增加 20%
+</code></pre></div>
+<p><strong>原则：保守调整，一次只改一点。</strong></p>
+<hr />
+<h2 id="104">10.4 超时强杀：不能让任务永远卡住<a class="headerlink" href="#104" title="Permanent link">&para;</a></h2>
+<h3 id="1041">10.4.1 为什么需要超时<a class="headerlink" href="#1041" title="Permanent link">&para;</a></h3>
+<p>一个任务可能永久卡住的原因：</p>
+<ul>
+<li>Worker 进程假死</li>
+<li>网络请求无限等待</li>
+<li>平台响应极慢</li>
+<li>代码死循环</li>
+</ul>
+<p>如果没有超时机制，这个任务会永远占用资源。</p>
+<h3 id="1042">10.4.2 超时时间的设定<a class="headerlink" href="#1042" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>平台类型</th>
+<th>推荐超时</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API 调用</td>
+<td>10-30 秒</td>
+<td>正常 API 响应很快</td>
+</tr>
+<tr>
+<td>浏览器自动化</td>
+<td>60-120 秒</td>
+<td>页面加载慢</td>
+</tr>
+<tr>
+<td>文件上传</td>
+<td>120-300 秒</td>
+<td>大文件需要时间</td>
+</tr>
+<tr>
+<td>未知任务</td>
+<td>60 秒（默认）</td>
+<td>保守估计</td>
+</tr>
+</tbody>
+</table>
+<p><strong>原则：超时时间 = 正常执行时间的 3 倍。</strong></p>
+<h3 id="1043">10.4.3 强杀机制<a class="headerlink" href="#1043" title="Permanent link">&para;</a></h3>
+<p>超时后不能只是"标记失败"，必须强制终止进程：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">wait_for</span><span class="p">(</span><span class="n">worker_task</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">WORKER_TIMEOUT</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">except</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">TimeoutError</span><span class="p">:</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="c1"># 强制终止</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">worker_process</span><span class="o">.</span><span class="n">kill</span><span class="p">()</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="k">await</span> <span class="n">worker_process</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="n">task</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;timeout&quot;</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="n">task</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Worker timeout after </span><span class="si">{</span><span class="n">WORKER_TIMEOUT</span><span class="si">}</span><span class="s2">s&quot;</span>
+</code></pre></div>
+<p>为什么必须强杀？</p>
+<ul>
+<li>只标记超时，进程可能还在后台运行</li>
+<li>残留进程会消耗内存、CPU、网络连接</li>
+<li>长期累积会导致系统资源耗尽</li>
+</ul>
+<hr />
+<h2 id="105">10.5 失败重试：不能一次失败就放弃<a class="headerlink" href="#105" title="Permanent link">&para;</a></h2>
+<h3 id="1051">10.5.1 重试策略<a class="headerlink" href="#1051" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>策略</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>立即重试</td>
+<td>适合瞬时错误（如网络抖动）</td>
+</tr>
+<tr>
+<td>延迟重试</td>
+<td>适合限流、临时不可用</td>
+</tr>
+<tr>
+<td>指数退避</td>
+<td>第1次等1秒，第2次等2秒，第4秒...</td>
+</tr>
+<tr>
+<td>上限次数</td>
+<td>最多重试 N 次，防止无限重试</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1052">10.5.2 什么错误应该重试<a class="headerlink" href="#1052" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>错误类型</th>
+<th>是否重试</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>网络超时</td>
+<td>✅ 是</td>
+<td>可能是临时问题</td>
+</tr>
+<tr>
+<td>平台限流</td>
+<td>✅ 是（延迟重试）</td>
+<td>等一会儿可能恢复</td>
+</tr>
+<tr>
+<td>登录失效</td>
+<td>❌ 否</td>
+<td>需要人工介入</td>
+</tr>
+<tr>
+<td>内容违规</td>
+<td>❌ 否</td>
+<td>重试也没用</td>
+</tr>
+<tr>
+<td>参数错误</td>
+<td>❌ 否</td>
+<td>代码问题，不是临时问题</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1053">10.5.3 重试的代码实现<a class="headerlink" href="#1053" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">execute_with_retry</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">max_retries</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">for</span> <span class="n">attempt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_retries</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>            <span class="n">result</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>            <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>                <span class="k">return</span> <span class="n">result</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>            <span class="k">if</span> <span class="n">attempt</span> <span class="o">==</span> <span class="n">max_retries</span><span class="p">:</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>                <span class="k">raise</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>            <span class="n">wait_time</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">attempt</span>  <span class="c1"># 指数退避</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">wait_time</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="106">10.6 限流与间隔：保护账号不被封<a class="headerlink" href="#106" title="Permanent link">&para;</a></h2>
+<h3 id="1061">10.6.1 为什么需要限流<a class="headerlink" href="#1061" title="Permanent link">&para;</a></h3>
+<p>平台会检测发帖频率。太快会被 Ban。</p>
+<table>
+<thead>
+<tr>
+<th>平台</th>
+<th>建议间隔</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>抖音</td>
+<td>5-10 分钟</td>
+</tr>
+<tr>
+<td>Facebook</td>
+<td>10-30 分钟</td>
+</tr>
+<tr>
+<td>X (Twitter)</td>
+<td>2-5 分钟</td>
+</tr>
+<tr>
+<td>Instagram</td>
+<td>10-20 分钟</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1062">10.6.2 间隔控制的实现<a class="headerlink" href="#1062" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># 每个平台记录上次发帖时间</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">last_post_time</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="s2">&quot;douyin&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="s2">&quot;facebook&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="s2">&quot;tiktok&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">}</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="k">def</span><span class="w"> </span><span class="nf">can_post</span><span class="p">(</span><span class="n">platform</span><span class="p">):</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="n">last</span> <span class="o">=</span> <span class="n">last_post_time</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">platform</span><span class="p">)</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    <span class="k">if</span> <span class="n">last</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        <span class="k">return</span> <span class="kc">True</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    <span class="n">interval</span> <span class="o">=</span> <span class="n">PLATFORM_INTERVAL</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">platform</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>  <span class="c1"># 默认60秒</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    <span class="k">return</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">last</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">interval</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="k">def</span><span class="w"> </span><span class="nf">post</span><span class="p">(</span><span class="n">platform</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">can_post</span><span class="p">(</span><span class="n">platform</span><span class="p">):</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>        <span class="c1"># 加入等待队列，而不是直接拒绝</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>        <span class="n">wait_until_next_slot</span><span class="p">(</span><span class="n">platform</span><span class="p">)</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>    <span class="c1"># 执行发帖</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>    <span class="n">result</span> <span class="o">=</span> <span class="n">do_post</span><span class="p">(</span><span class="n">platform</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>    <span class="n">last_post_time</span><span class="p">[</span><span class="n">platform</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>    <span class="k">return</span> <span class="n">result</span>
+</code></pre></div>
+<h3 id="1063">10.6.3 动态间隔<a class="headerlink" href="#1063" title="Permanent link">&para;</a></h3>
+<p>可以根据账号状态动态调整间隔：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>if 账号信用好:
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    间隔 = 5 分钟
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>elif 账号刚解封:
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    间隔 = 30 分钟
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>else:
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    间隔 = 10 分钟（默认）
+</code></pre></div>
+<hr />
+<h2 id="107">10.7 状态管理：每个任务都要有"户口"<a class="headerlink" href="#107" title="Permanent link">&para;</a></h2>
+<h3 id="1071">10.7.1 任务的生命周期<a class="headerlink" href="#1071" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>pending → running → success
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>                ↘ failed
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>                ↘ timeout
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>                ↘ retry → pending（回到起点）
+</code></pre></div>
+<h3 id="1072">10.7.2 任务需要记录的信息<a class="headerlink" href="#1072" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>task_id</td>
+<td>唯一标识</td>
+<td>追溯</td>
+</tr>
+<tr>
+<td>status</td>
+<td>当前状态</td>
+<td>监控</td>
+</tr>
+<tr>
+<td>platform</td>
+<td>目标平台</td>
+<td>分类</td>
+</tr>
+<tr>
+<td>content_id</td>
+<td>内容 ID</td>
+<td>关联内容层</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>创建时间</td>
+<td>审计</td>
+</tr>
+<tr>
+<td>started_at</td>
+<td>开始时间</td>
+<td>性能分析</td>
+</tr>
+<tr>
+<td>completed_at</td>
+<td>完成时间</td>
+<td>性能分析</td>
+</tr>
+<tr>
+<td>result</td>
+<td>执行结果</td>
+<td>反馈学习</td>
+</tr>
+<tr>
+<td>error_msg</td>
+<td>错误信息</td>
+<td>排查问题</td>
+</tr>
+<tr>
+<td>retry_count</td>
+<td>已重试次数</td>
+<td>控制重试</td>
+</tr>
+<tr>
+<td>worker_pid</td>
+<td>进程 ID</td>
+<td>超时强杀</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1073">10.7.3 状态存储<a class="headerlink" href="#1073" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>存储方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Demo</td>
+<td>内存 dict</td>
+<td>简单，但重启丢失</td>
+</tr>
+<tr>
+<td>生产</td>
+<td>Redis + 数据库</td>
+<td>Redis 存实时状态，数据库持久化</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="108">10.8 日志与审计：出了事能找到原因<a class="headerlink" href="#108" title="Permanent link">&para;</a></h2>
+<h3 id="1081">10.8.1 日志分级<a class="headerlink" href="#1081" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>级别</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DEBUG</td>
+<td>开发调试</td>
+</tr>
+<tr>
+<td>INFO</td>
+<td>正常操作记录</td>
+</tr>
+<tr>
+<td>WARNING</td>
+<td>异常但可自动恢复</td>
+</tr>
+<tr>
+<td>ERROR</td>
+<td>需要人工关注</td>
+</tr>
+<tr>
+<td>CRITICAL</td>
+<td>系统严重故障</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1082">10.8.2 必须记录的关键事件<a class="headerlink" href="#1082" title="Permanent link">&para;</a></h3>
+<ul>
+<li>任务创建</li>
+<li>任务开始</li>
+<li>任务成功</li>
+<li>任务失败（含错误原因）</li>
+<li>任务超时</li>
+<li>任务重试</li>
+<li>参数校验失败</li>
+<li>平台限流触发</li>
+</ul>
+<h3 id="1083">10.8.3 审计日志的格式<a class="headerlink" href="#1083" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-05-05T10:00:00Z&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;INFO&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task_created&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span><span class="nt">&quot;task_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task_0001&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">  </span><span class="nt">&quot;platform&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;douyin&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">  </span><span class="nt">&quot;operator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;scheduler-001&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">  </span><span class="nt">&quot;trace_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;abc-123-def&quot;</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>原则：审计日志应该是不可变的——只能追加，不能修改，不能删除。</strong></p>
+<hr />
+<h2 id="109">10.9 异常隔离：一个任务失败不影响其他<a class="headerlink" href="#109" title="Permanent link">&para;</a></h2>
+<h3 id="1091">10.9.1 隔离原则<a class="headerlink" href="#1091" title="Permanent link">&para;</a></h3>
+<p>失败是常态，但失败不能扩散。</p>
+<h3 id="1092">10.9.2 隔离机制<a class="headerlink" href="#1092" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>层级</th>
+<th>隔离方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>任务级</td>
+<td>每个任务独立进程/协程</td>
+</tr>
+<tr>
+<td>平台级</td>
+<td>每个平台独立队列</td>
+</tr>
+<tr>
+<td>账号级</td>
+<td>每个账号独立 Worker</td>
+</tr>
+<tr>
+<td>分身级</td>
+<td>分身之间不共享状态</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1093">10.9.3 失败扩散的防护<a class="headerlink" href="#1093" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># ❌ 错误做法：一个任务失败导致队列清空</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">queue</span><span class="p">:</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>        <span class="n">execute</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="n">queue</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>  <span class="c1"># 千万别这么做！</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="c1"># ✅ 正确做法：只跳过失败的任务</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">queue</span><span class="p">:</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>        <span class="n">execute</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>        <span class="n">log_error</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>        <span class="k">continue</span>  <span class="c1"># 继续下一个</span>
+</code></pre></div>
+<hr />
+<h2 id="1010">10.10 人工介入机制：系统不能完全无人值守<a class="headerlink" href="#1010" title="Permanent link">&para;</a></h2>
+<h3 id="10101">10.10.1 什么时候需要人工介入<a class="headerlink" href="#10101" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>首次配置</td>
+<td>需要人填写平台账号、API Key</td>
+</tr>
+<tr>
+<td>登录失效</td>
+<td>平台 Token 过期</td>
+</tr>
+<tr>
+<td>持续失败</td>
+<td>同一任务失败超过 N 次</td>
+</tr>
+<tr>
+<td>异常模式</td>
+<td>系统检测到异常行为</td>
+</tr>
+<tr>
+<td>探索模式授权</td>
+<td>开启新功能需要人确认</td>
+</tr>
+</tbody>
+</table>
+<h3 id="10102">10.10.2 介入方式<a class="headerlink" href="#10102" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>邮件/短信告警</td>
+<td>非紧急，可以等</td>
+</tr>
+<tr>
+<td>企业微信/钉钉通知</td>
+<td>需要关注</td>
+</tr>
+<tr>
+<td>Web 管理界面操作</td>
+<td>需要手动干预</td>
+</tr>
+<tr>
+<td>API 调用</td>
+<td>可通过其他系统自动处理</td>
+</tr>
+</tbody>
+</table>
+<h3 id="10103">10.10.3 告警阈值示例<a class="headerlink" href="#10103" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>if 成功率 &lt; 90% in last 1 hour:
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    发送告警（邮件）
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>if 同一任务失败 &gt; 3 次:
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    发送告警（钉钉），暂停该任务
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>if 队列长度 &gt; 100:
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>    发送告警（短信），人工介入
+</code></pre></div>
+<hr />
+<h2 id="1011">10.11 可控执行的完整检查清单<a class="headerlink" href="#1011" title="Permanent link">&para;</a></h2>
+<p>部署前，确认以下问题都有答案：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>检查项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>能看到吗？</td>
+<td>是否有监控看板？日志是否完整？</td>
+</tr>
+<tr>
+<td>能追溯吗？</td>
+<td>每个任务是否有唯一 ID？是否能查到历史？</td>
+</tr>
+<tr>
+<td>能干预吗？</td>
+<td>能否暂停任务？能否强制终止？</td>
+</tr>
+<tr>
+<td>能恢复吗？</td>
+<td>失败后是否自动重试？重试次数是否有限制？</td>
+</tr>
+<tr>
+<td>能防御吗？</td>
+<td>失败是否隔离？超时是否强杀？</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="1012">10.12 本章小结<a class="headerlink" href="#1012" title="Permanent link">&para;</a></h2>
+<p>可控执行不是一句口号，而是一系列可落地的机制：</p>
+<table>
+<thead>
+<tr>
+<th>机制</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>任务队列</td>
+<td>有序执行，避免混乱</td>
+</tr>
+<tr>
+<td>并发控制</td>
+<td>防止过载，合理利用资源</td>
+</tr>
+<tr>
+<td>超时强杀</td>
+<td>阻止任务永远卡死</td>
+</tr>
+<tr>
+<td>失败重试</td>
+<td>提高成功率，减少人工干预</td>
+</tr>
+<tr>
+<td>限流间隔</td>
+<td>保护账号不被平台封禁</td>
+</tr>
+<tr>
+<td>状态管理</td>
+<td>每个任务可追溯</td>
+</tr>
+<tr>
+<td>日志审计</td>
+<td>出了问题能找到原因</td>
+</tr>
+<tr>
+<td>异常隔离</td>
+<td>一个失败不影响其他</td>
+</tr>
+<tr>
+<td>人工介入</td>
+<td>系统不能完全无人值守</td>
+</tr>
+</tbody>
+</table>
+<p><strong>一句话总结：</strong></p>
+<blockquote>
+<p>可控执行 = 队列 + 并发控制 + 超时 + 重试 + 限流 + 状态 + 日志 + 隔离 + 人工介入。</p>
+<p>九个机制，缺一不可。</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.expand", "navigation.indexes", "navigation.top", "search.highlight", "search.share", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
