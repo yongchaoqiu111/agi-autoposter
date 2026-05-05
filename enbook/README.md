@@ -44,7 +44,7 @@ Humans Lead Evolution, AI Assists Execution
 
 ---
 
-##  Why This Is an Industrial Architecture
+## 🚀 Why This Is an Industrial Architecture
 
 Many automation projects are just scripts. This project is a **production-grade foundation**:
 
@@ -52,7 +52,7 @@ Many automation projects are just scripts. This project is a **production-grade 
 - ✅ Atomic isolation — one task failure doesn't affect the whole system
 - ✅ High concurrency, horizontally scalable
 - ✅ Low token consumption (execution layer = script mode)
-- ✅ No hallucination, no AI失控
+- ✅ No hallucination, no AI out of control
 - ✅ Humans hold final verification and evolution rights
 - ✅ One exploration, permanent execution
 - ✅ Cross-platform, pluggable, large-scale deployable
@@ -125,9 +125,9 @@ All business-irrelevant code has been stripped away, retaining only the most cor
 
 ## 🔐 Core Philosophy (For the Next 100 Years)
 
-- AI can be powerful, but must not be失控
+- AI can be powerful, but must not be out of control
 - Humans must hold final decision, evolution, and verification rights
-- Don't let black boxes swallow human主导地位
+- Don't let black boxes swallow human dominant position
 - Industrial AI must be: stable, controllable, explainable, stoppable
 
 ---
@@ -144,7 +144,7 @@ All business-irrelevant code has been stripped away, retaining only the most cor
 
 I focus on practical AI architecture implementation, avoiding corporate jargon and academic concepts, only doing architecture design that can be deployed and create value. The following collaboration directions are available for experienced partners:
 
-**One-on-One AI Architecture Consulting:** Help individuals/teams sort out business architecture, avoid pitfalls in selection, plan implementation paths, quickly打通 from idea to deployment.
+**One-on-One AI Architecture Consulting:** Help individuals/teams sort out business architecture, avoid pitfalls in selection, plan implementation paths, quickly bridge the gap from idea to deployment.
 
 **Custom Complete Architecture Solution:** Output complete architecture diagrams, layered documents, module breakdown, implementation steps. The solution can be directly handed to the development team for implementation without secondary optimization.
 
