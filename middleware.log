@@ -1,0 +1,442 @@
+2026-05-05 13:37:42,145 [INFO] 启动审核监督中间层...
+2026-05-05 13:37:50,497 [INFO] 任务 task_0001 加入 douyin 队列
+2026-05-05 13:37:50,498 [INFO] 开始执行任务 task_0001: douyin txt#1 img#3
+2026-05-05 13:37:50,822 [INFO] 任务 task_0002 加入 douyin 队列
+2026-05-05 13:37:51,136 [INFO] 任务 task_0003 加入 facebook 队列
+2026-05-05 13:37:51,137 [INFO] 开始执行任务 task_0003: facebook txt#3 img#5
+2026-05-05 13:37:51,461 [INFO] 任务 task_0004 加入 tiktok 队列
+2026-05-05 13:37:51,462 [INFO] 开始执行任务 task_0004: tiktok txt#4 img#1
+2026-05-05 13:37:51,785 [INFO] 任务 task_0005 加入 x 队列
+2026-05-05 13:37:52,097 [INFO] 任务 task_0006 加入 instagram 队列
+2026-05-05 13:37:52,409 [INFO] 任务 task_0007 加入 facebook 队列
+2026-05-05 13:37:52,638 [INFO] 任务 task_0001 输出:
+[douyin] ʼִԶ
+  İ ID: 1
+  ͼƬ ID: 3
+[douyin] İ #1...
+[douyin] ͼƬ #3...
+[douyin] ڷ...
+[douyin] ɹ
+[douyin] : https://douyin.com/post/1_3_1777959472
+
+RESULT:success:url=https://douyin.com/post/1_3_1777959472
+
+2026-05-05 13:37:52,639 [INFO] 任务 task_0001 完成: TaskStatus.SUCCESS
+2026-05-05 13:37:52,639 [INFO] douyin 等待间隔 10.0 秒
+2026-05-05 13:37:53,270 [INFO] 任务 task_0003 输出:
+[facebook] ʼִԶ
+  İ ID: 3
+  ͼƬ ID: 5
+[facebook] İ #3...
+[facebook] ͼƬ #5...
+[facebook] ڷ...
+[facebook] ɹ
+[facebook] : https://facebook.com/post/3_5_1777959473
+
+RESULT:success:url=https://facebook.com/post/3_5_1777959473
+
+2026-05-05 13:37:53,270 [INFO] 任务 task_0003 完成: TaskStatus.SUCCESS
+2026-05-05 13:37:53,271 [INFO] facebook 等待间隔 10.0 秒
+2026-05-05 13:37:53,598 [INFO] 任务 task_0004 输出:
+[tiktok] ʼִԶ
+  İ ID: 4
+  ͼƬ ID: 1
+[tiktok] İ #4...
+[tiktok] ͼƬ #1...
+[tiktok] ڷ...
+[tiktok] ɹ
+[tiktok] : https://tiktok.com/post/4_1_1777959473
+
+RESULT:success:url=https://tiktok.com/post/4_1_1777959473
+
+2026-05-05 13:37:53,599 [INFO] 任务 task_0004 完成: TaskStatus.SUCCESS
+2026-05-05 13:38:02,646 [INFO] 开始执行任务 task_0002: douyin txt#2 img#4
+2026-05-05 13:38:03,281 [INFO] 开始执行任务 task_0007: facebook txt#7 img#6
+2026-05-05 13:38:04,780 [INFO] 任务 task_0002 输出:
+[douyin] ʼִԶ
+  İ ID: 2
+  ͼƬ ID: 4
+[douyin] İ #2...
+[douyin] ͼƬ #4...
+[douyin] ڷ...
+[douyin] ɹ
+[douyin] : https://douyin.com/post/2_4_1777959484
+
+RESULT:success:url=https://douyin.com/post/2_4_1777959484
+
+2026-05-05 13:38:04,781 [INFO] 任务 task_0002 完成: TaskStatus.SUCCESS
+2026-05-05 13:38:05,413 [INFO] 任务 task_0007 输出:
+[facebook] ʼִԶ
+  İ ID: 7
+  ͼƬ ID: 6
+[facebook] İ #7...
+[facebook] ͼƬ #6...
+[facebook] ڷ...
+[facebook] ɹ
+[facebook] : https://facebook.com/post/7_6_1777959485
+
+RESULT:success:url=https://facebook.com/post/7_6_1777959485
+
+2026-05-05 13:38:05,414 [INFO] 任务 task_0007 完成: TaskStatus.SUCCESS
+2026-05-05 13:39:13,677 [INFO] 任务 task_0008 加入 douyin 队列
+2026-05-05 13:39:13,678 [INFO] 开始执行任务 task_0008: douyin txt#1 img#3
+2026-05-05 13:39:14,001 [INFO] 任务 task_0009 加入 douyin 队列
+2026-05-05 13:39:14,311 [INFO] 任务 task_0010 加入 facebook 队列
+2026-05-05 13:39:14,312 [INFO] 开始执行任务 task_0010: facebook txt#3 img#5
+2026-05-05 13:39:14,638 [INFO] 任务 task_0011 加入 tiktok 队列
+2026-05-05 13:39:14,639 [INFO] 开始执行任务 task_0011: tiktok txt#4 img#1
+2026-05-05 13:39:14,965 [INFO] 任务 task_0012 加入 x 队列
+2026-05-05 13:39:15,276 [INFO] 任务 task_0013 加入 instagram 队列
+2026-05-05 13:39:15,589 [INFO] 任务 task_0014 加入 facebook 队列
+2026-05-05 13:39:15,817 [INFO] 任务 task_0008 输出:
+[douyin] ʼִԶ
+  İ ID: 1
+  ͼƬ ID: 3
+[douyin] İ #1...
+[douyin] ͼƬ #3...
+[douyin] ڷ...
+[douyin] ɹ
+[douyin] : https://douyin.com/post/1_3_1777959555
+
+RESULT:success:url=https://douyin.com/post/1_3_1777959555
+
+2026-05-05 13:39:15,818 [INFO] 任务 task_0008 完成: TaskStatus.SUCCESS
+2026-05-05 13:39:15,818 [INFO] douyin 等待间隔 10.0 秒
+2026-05-05 13:39:16,444 [INFO] 任务 task_0010 输出:
+[facebook] ʼִԶ
+  İ ID: 3
+  ͼƬ ID: 5
+[facebook] İ #3...
+[facebook] ͼƬ #5...
+[facebook] ڷ...
+[facebook] ɹ
+[facebook] : https://facebook.com/post/3_5_1777959556
+
+RESULT:success:url=https://facebook.com/post/3_5_1777959556
+
+2026-05-05 13:39:16,445 [INFO] 任务 task_0010 完成: TaskStatus.SUCCESS
+2026-05-05 13:39:16,445 [INFO] facebook 等待间隔 10.0 秒
+2026-05-05 13:39:16,769 [INFO] 任务 task_0011 输出:
+[tiktok] ʼִԶ
+  İ ID: 4
+  ͼƬ ID: 1
+[tiktok] İ #4...
+[tiktok] ͼƬ #1...
+[tiktok] ڷ...
+[tiktok] ɹ
+[tiktok] : https://tiktok.com/post/4_1_1777959556
+
+RESULT:success:url=https://tiktok.com/post/4_1_1777959556
+
+2026-05-05 13:39:16,770 [INFO] 任务 task_0011 完成: TaskStatus.SUCCESS
+2026-05-05 13:39:25,833 [INFO] 开始执行任务 task_0009: douyin txt#2 img#4
+2026-05-05 13:39:26,460 [INFO] 开始执行任务 task_0014: facebook txt#7 img#6
+2026-05-05 13:39:27,966 [INFO] 任务 task_0009 输出:
+[douyin] ʼִԶ
+  İ ID: 2
+  ͼƬ ID: 4
+[douyin] İ #2...
+[douyin] ͼƬ #4...
+[douyin] ڷ...
+[douyin] ɹ
+[douyin] : https://douyin.com/post/2_4_1777959567
+
+RESULT:success:url=https://douyin.com/post/2_4_1777959567
+
+2026-05-05 13:39:27,967 [INFO] 任务 task_0009 完成: TaskStatus.SUCCESS
+2026-05-05 13:39:28,597 [INFO] 任务 task_0014 输出:
+[facebook] ʼִԶ
+  İ ID: 7
+  ͼƬ ID: 6
+[facebook] İ #7...
+[facebook] ͼƬ #6...
+[facebook] ڷ...
+[facebook] ɹ
+[facebook] : https://facebook.com/post/7_6_1777959568
+
+RESULT:success:url=https://facebook.com/post/7_6_1777959568
+
+2026-05-05 13:39:28,598 [INFO] 任务 task_0014 完成: TaskStatus.SUCCESS
+2026-05-05 13:39:49,916 [INFO] 启动审核监督中间层...
+2026-05-05 13:39:57,215 [INFO] 任务 task_0001 加入 douyin 队列
+2026-05-05 13:39:57,216 [INFO] 开始执行任务 task_0001: douyin txt#1 img#3
+2026-05-05 13:39:57,539 [INFO] 任务 task_0002 加入 douyin 队列
+2026-05-05 13:39:57,849 [INFO] 任务 task_0003 加入 facebook 队列
+2026-05-05 13:39:57,850 [INFO] 开始执行任务 task_0003: facebook txt#3 img#5
+2026-05-05 13:39:58,175 [INFO] 任务 task_0004 加入 tiktok 队列
+2026-05-05 13:39:58,176 [INFO] 开始执行任务 task_0004: tiktok txt#4 img#1
+2026-05-05 13:39:58,489 [INFO] 任务 task_0005 加入 x 队列
+2026-05-05 13:39:58,799 [INFO] 任务 task_0006 加入 instagram 队列
+2026-05-05 13:39:59,111 [INFO] 任务 task_0007 加入 facebook 队列
+2026-05-05 13:39:59,356 [INFO] 任务 task_0001 输出:
+[douyin] ʼִԶ
+  İ ID: 1
+  ͼƬ ID: 3
+[douyin] İ #1...
+[douyin] ͼƬ #3...
+[douyin] ڷ...
+[douyin] ɹ
+[douyin] : https://douyin.com/post/1_3_1777959599
+
+RESULT:success:url=https://douyin.com/post/1_3_1777959599
+
+2026-05-05 13:39:59,357 [INFO] 任务 task_0001 完成: TaskStatus.SUCCESS
+2026-05-05 13:39:59,357 [INFO] douyin 等待间隔 10.0 秒
+2026-05-05 13:39:59,983 [INFO] 任务 task_0003 输出:
+[facebook] ʼִԶ
+  İ ID: 3
+  ͼƬ ID: 5
+[facebook] İ #3...
+[facebook] ͼƬ #5...
+[facebook] ڷ...
+[facebook] ɹ
+[facebook] : https://facebook.com/post/3_5_1777959599
+
+RESULT:success:url=https://facebook.com/post/3_5_1777959599
+
+2026-05-05 13:39:59,984 [INFO] 任务 task_0003 完成: TaskStatus.SUCCESS
+2026-05-05 13:39:59,984 [INFO] facebook 等待间隔 10.0 秒
+2026-05-05 13:40:00,313 [INFO] 任务 task_0004 输出:
+[tiktok] ʼִԶ
+  İ ID: 4
+  ͼƬ ID: 1
+[tiktok] İ #4...
+[tiktok] ͼƬ #1...
+[tiktok] ڷ...
+[tiktok] ɹ
+[tiktok] : https://tiktok.com/post/4_1_1777959600
+
+RESULT:success:url=https://tiktok.com/post/4_1_1777959600
+
+2026-05-05 13:40:00,314 [INFO] 任务 task_0004 完成: TaskStatus.SUCCESS
+2026-05-05 13:40:09,367 [INFO] 开始执行任务 task_0002: douyin txt#2 img#4
+2026-05-05 13:40:09,989 [INFO] 开始执行任务 task_0007: facebook txt#7 img#6
+2026-05-05 13:40:11,500 [INFO] 任务 task_0002 输出:
+[douyin] ʼִԶ
+  İ ID: 2
+  ͼƬ ID: 4
+[douyin] İ #2...
+[douyin] ͼƬ #4...
+[douyin] ڷ...
+[douyin] ɹ
+[douyin] : https://douyin.com/post/2_4_1777959611
+
+RESULT:success:url=https://douyin.com/post/2_4_1777959611
+
+2026-05-05 13:40:11,501 [INFO] 任务 task_0002 完成: TaskStatus.SUCCESS
+2026-05-05 13:40:12,122 [INFO] 任务 task_0007 输出:
+[facebook] ʼִԶ
+  İ ID: 7
+  ͼƬ ID: 6
+[facebook] İ #7...
+[facebook] ͼƬ #6...
+[facebook] ڷ...
+[facebook] ɹ
+[facebook] : https://facebook.com/post/7_6_1777959612
+
+RESULT:success:url=https://facebook.com/post/7_6_1777959612
+
+2026-05-05 13:40:12,123 [INFO] 任务 task_0007 完成: TaskStatus.SUCCESS
+2026-05-05 13:41:23,780 [INFO] 启动审核监督中间层...
+2026-05-05 13:41:30,827 [INFO] 任务 task_0001 加入 douyin 队列 (队列长度: 1)
+2026-05-05 13:41:30,828 [INFO] 开始执行任务 task_0001: douyin txt#1 img#3
+2026-05-05 13:41:31,150 [INFO] 任务 task_0002 加入 douyin 队列 (队列长度: 1)
+2026-05-05 13:41:31,462 [INFO] 任务 task_0003 加入 facebook 队列 (队列长度: 1)
+2026-05-05 13:41:31,463 [INFO] 开始执行任务 task_0003: facebook txt#3 img#5
+2026-05-05 13:41:31,789 [INFO] 任务 task_0004 加入 tiktok 队列 (队列长度: 1)
+2026-05-05 13:41:31,790 [INFO] 开始执行任务 task_0004: tiktok txt#4 img#1
+2026-05-05 13:41:32,114 [INFO] 任务 task_0005 加入 x 队列 (队列长度: 1)
+2026-05-05 13:41:32,426 [INFO] 任务 task_0006 加入 instagram 队列 (队列长度: 1)
+2026-05-05 13:41:32,738 [INFO] 任务 task_0007 加入 facebook 队列 (队列长度: 1)
+2026-05-05 13:41:32,969 [INFO] 任务 task_0001 输出:
+[douyin] ʼִԶ
+  İ ID: 1
+  ͼƬ ID: 3
+[douyin] İ #1...
+[douyin] ͼƬ #3...
+[douyin] ڷ...
+[douyin] ʧܣ
+
+RESULT:fail:error=network_error
+
+2026-05-05 13:41:32,970 [INFO] 任务 task_0001 将重试 (1/2)
+2026-05-05 13:41:33,598 [INFO] 任务 task_0003 输出:
+[facebook] ʼִԶ
+  İ ID: 3
+  ͼƬ ID: 5
+[facebook] İ #3...
+[facebook] ͼƬ #5...
+[facebook] ڷ...
+[facebook] ʧܣ
+
+RESULT:fail:error=network_error
+
+2026-05-05 13:41:33,598 [INFO] 任务 task_0003 将重试 (1/2)
+2026-05-05 13:41:33,919 [INFO] 任务 task_0004 输出:
+[tiktok] ʼִԶ
+  İ ID: 4
+  ͼƬ ID: 1
+[tiktok] İ #4...
+[tiktok] ͼƬ #1...
+[tiktok] ڷ...
+[tiktok] ɹ
+[tiktok] : https://tiktok.com/post/4_1_1777959693
+
+RESULT:success:url=https://tiktok.com/post/4_1_1777959693
+
+2026-05-05 13:41:33,920 [INFO] 任务 task_0004 完成: TaskStatus.SUCCESS
+2026-05-05 13:41:42,979 [INFO] 任务 task_0001 加入 douyin 队列 (队列长度: 2)
+2026-05-05 13:41:42,979 [INFO] 任务 task_0001 完成: TaskStatus.RETRYING
+2026-05-05 13:41:42,980 [INFO] douyin 等待间隔 10.0 秒
+2026-05-05 13:41:43,601 [INFO] 任务 task_0003 加入 facebook 队列 (队列长度: 2)
+2026-05-05 13:41:43,601 [INFO] 任务 task_0003 完成: TaskStatus.RETRYING
+2026-05-05 13:41:43,602 [INFO] facebook 等待间隔 10.0 秒
+2026-05-05 13:41:52,982 [INFO] 开始执行任务 task_0002: douyin txt#2 img#4
+2026-05-05 13:41:53,616 [INFO] 开始执行任务 task_0007: facebook txt#7 img#6
+2026-05-05 13:41:55,114 [INFO] 任务 task_0002 输出:
+[douyin] ʼִԶ
+  İ ID: 2
+  ͼƬ ID: 4
+[douyin] İ #2...
+[douyin] ͼƬ #4...
+[douyin] ڷ...
+[douyin] ɹ
+[douyin] : https://douyin.com/post/2_4_1777959715
+
+RESULT:success:url=https://douyin.com/post/2_4_1777959715
+
+2026-05-05 13:41:55,115 [INFO] 任务 task_0002 完成: TaskStatus.SUCCESS
+2026-05-05 13:41:55,116 [INFO] douyin 等待间隔 10.0 秒
+2026-05-05 13:41:55,749 [INFO] 任务 task_0007 输出:
+[facebook] ʼִԶ
+  İ ID: 7
+  ͼƬ ID: 6
+[facebook] İ #7...
+[facebook] ͼƬ #6...
+[facebook] ڷ...
+[facebook] ɹ
+[facebook] : https://facebook.com/post/7_6_1777959715
+
+RESULT:success:url=https://facebook.com/post/7_6_1777959715
+
+2026-05-05 13:41:55,750 [INFO] 任务 task_0007 完成: TaskStatus.SUCCESS
+2026-05-05 13:41:55,750 [INFO] facebook 等待间隔 10.0 秒
+2026-05-05 13:42:05,122 [INFO] 开始执行任务 task_0001: douyin txt#1 img#3
+2026-05-05 13:42:05,757 [INFO] 开始执行任务 task_0003: facebook txt#3 img#5
+2026-05-05 13:42:07,256 [INFO] 任务 task_0001 输出:
+[douyin] ʼִԶ
+  İ ID: 1
+  ͼƬ ID: 3
+[douyin] İ #1...
+[douyin] ͼƬ #3...
+[douyin] ڷ...
+[douyin] ɹ
+[douyin] : https://douyin.com/post/1_3_1777959727
+
+RESULT:success:url=https://douyin.com/post/1_3_1777959727
+
+2026-05-05 13:42:07,257 [INFO] 任务 task_0001 完成: TaskStatus.SUCCESS
+2026-05-05 13:42:07,891 [INFO] 任务 task_0003 输出:
+[facebook] ʼִԶ
+  İ ID: 3
+  ͼƬ ID: 5
+[facebook] İ #3...
+[facebook] ͼƬ #5...
+[facebook] ڷ...
+[facebook] ɹ
+[facebook] : https://facebook.com/post/3_5_1777959727
+
+RESULT:success:url=https://facebook.com/post/3_5_1777959727
+
+2026-05-05 13:42:07,892 [INFO] 任务 task_0003 完成: TaskStatus.SUCCESS
+2026-05-05 13:45:23,815 [INFO] 启动审核监督中间层...
+2026-05-05 13:45:31,460 [INFO] 执行任务 task_0001: douyin txt#1 img#3
+2026-05-05 13:45:33,602 [INFO] 任务 task_0001 成功，记录结果
+2026-05-05 13:45:33,603 [INFO] 执行任务 task_0002: douyin txt#2 img#4
+2026-05-05 13:45:35,738 [INFO] 任务 task_0002 成功，记录结果
+2026-05-05 13:45:35,738 [INFO] 执行任务 task_0003: facebook txt#3 img#5
+2026-05-05 13:45:37,870 [INFO] 任务 task_0003 成功，记录结果
+2026-05-05 13:45:37,870 [INFO] 执行任务 task_0004: tiktok txt#4 img#1
+2026-05-05 13:45:40,001 [INFO] 任务 task_0004 成功，记录结果
+2026-05-05 13:45:40,001 [INFO] 执行任务 task_0005: x txt#5 img#2
+2026-05-05 13:45:42,131 [INFO] 任务 task_0005 成功，记录结果
+2026-05-05 13:45:42,131 [INFO] 执行任务 task_0006: instagram txt#6 img#3
+2026-05-05 13:45:44,262 [INFO] 任务 task_0006 成功，记录结果
+2026-05-05 13:45:44,262 [INFO] 执行任务 task_0007: facebook txt#7 img#6
+2026-05-05 13:45:46,397 [INFO] 任务 task_0007 成功，记录结果
+2026-05-05 15:13:59,260 [INFO] 执行任务 task_0001: douyin txt#20 img#9
+2026-05-05 15:13:59,278 [INFO] HTTP Request: POST http://localhost:8000/api/tasks "HTTP/1.1 200 OK"
+2026-05-05 15:13:59,278 [INFO] HTTP Request: POST http://localhost:8000/api/tasks "HTTP/1.1 200 OK"
+2026-05-05 15:13:59,280 [INFO] HTTP Request: POST http://localhost:8000/api/tasks "HTTP/1.1 200 OK"
+2026-05-05 15:13:59,281 [INFO] HTTP Request: POST http://localhost:8000/api/tasks "HTTP/1.1 200 OK"
+2026-05-05 15:13:59,281 [INFO] HTTP Request: POST http://localhost:8000/api/tasks "HTTP/1.1 200 OK"
+2026-05-05 15:13:59,595 [INFO] HTTP Request: POST http://localhost:8000/api/tasks "HTTP/1.1 200 OK"
+2026-05-05 15:13:59,598 [INFO] HTTP Request: POST http://localhost:8000/api/tasks "HTTP/1.1 200 OK"
+2026-05-05 15:13:59,601 [INFO] HTTP Request: POST http://localhost:8000/api/tasks "HTTP/1.1 200 OK"
+2026-05-05 15:13:59,603 [INFO] HTTP Request: POST http://localhost:8000/api/tasks "HTTP/1.1 200 OK"
+2026-05-05 15:13:59,604 [INFO] HTTP Request: POST http://localhost:8000/api/tasks "HTTP/1.1 200 OK"
+2026-05-05 15:13:59,906 [INFO] HTTP Request: POST http://localhost:8000/api/tasks "HTTP/1.1 200 OK"
+2026-05-05 15:13:59,909 [INFO] HTTP Request: POST http://localhost:8000/api/tasks "HTTP/1.1 200 OK"
+2026-05-05 15:13:59,911 [INFO] HTTP Request: POST http://localhost:8000/api/tasks "HTTP/1.1 200 OK"
+2026-05-05 15:13:59,913 [INFO] HTTP Request: POST http://localhost:8000/api/tasks "HTTP/1.1 200 OK"
+2026-05-05 15:13:59,915 [INFO] HTTP Request: POST http://localhost:8000/api/tasks "HTTP/1.1 200 OK"
+2026-05-05 15:14:01,400 [INFO] 任务 task_0001 成功，记录结果
+2026-05-05 15:14:01,400 [INFO] 执行任务 task_0002: x txt#40 img#5
+2026-05-05 15:14:03,532 [INFO] 任务 task_0002 成功，记录结果
+2026-05-05 15:14:03,532 [INFO] 执行任务 task_0003: facebook txt#30 img#3
+2026-05-05 15:14:05,659 [INFO] 任务 task_0003 成功，记录结果
+2026-05-05 15:14:05,660 [INFO] 执行任务 task_0004: instagram txt#50 img#6
+2026-05-05 15:14:07,789 [INFO] 任务 task_0004 成功，记录结果
+2026-05-05 15:14:07,789 [INFO] 执行任务 task_0005: douyin txt#10 img#7
+2026-05-05 15:14:09,922 [INFO] 任务 task_0005 成功，记录结果
+2026-05-05 15:14:09,922 [INFO] 执行任务 task_0006: x txt#21 img#7
+2026-05-05 15:14:12,054 [INFO] 任务 task_0006 成功，记录结果
+2026-05-05 15:14:12,055 [INFO] 执行任务 task_0007: tiktok txt#41 img#7
+2026-05-05 15:14:14,187 [INFO] 任务 task_0007 成功，记录结果
+2026-05-05 15:14:14,188 [INFO] 执行任务 task_0008: douyin txt#11 img#7
+2026-05-05 15:14:16,319 [INFO] 任务 task_0008 成功，记录结果
+2026-05-05 15:14:16,320 [INFO] 执行任务 task_0009: tiktok txt#31 img#7
+2026-05-05 15:14:18,452 [INFO] 任务 task_0009 成功，记录结果
+2026-05-05 15:14:18,453 [INFO] 执行任务 task_0010: x txt#51 img#6
+2026-05-05 15:14:20,585 [INFO] 任务 task_0010 失败，第 1 次重试
+2026-05-05 15:14:20,586 [INFO] 执行任务 task_0011: facebook txt#22 img#2
+2026-05-05 15:14:22,714 [INFO] 任务 task_0011 成功，记录结果
+2026-05-05 15:14:22,715 [INFO] 执行任务 task_0012: x txt#12 img#8
+2026-05-05 15:14:24,842 [INFO] 任务 task_0012 成功，记录结果
+2026-05-05 15:14:24,843 [INFO] 执行任务 task_0013: facebook txt#42 img#2
+2026-05-05 15:14:26,982 [INFO] 任务 task_0013 成功，记录结果
+2026-05-05 15:14:26,982 [INFO] 执行任务 task_0014: tiktok txt#32 img#6
+2026-05-05 15:14:29,116 [INFO] 任务 task_0014 成功，记录结果
+2026-05-05 15:14:29,116 [INFO] 执行任务 task_0015: instagram txt#52 img#8
+2026-05-05 15:14:31,242 [INFO] 任务 task_0015 成功，记录结果
+2026-05-05 15:14:31,242 [INFO] 执行任务 task_0010: x txt#51 img#6
+2026-05-05 15:14:33,372 [INFO] 任务 task_0010 失败，第 2 次重试
+2026-05-05 15:14:33,373 [INFO] 执行任务 task_0010: x txt#51 img#6
+2026-05-05 15:14:35,501 [INFO] 任务 task_0010 成功，记录结果
+2026-05-05 15:14:55,510 [INFO] HTTP Request: GET http://localhost:8000/api/tasks/task_0005 "HTTP/1.1 200 OK"
+2026-05-05 15:14:55,513 [INFO] HTTP Request: GET http://localhost:8000/api/tasks/task_0008 "HTTP/1.1 200 OK"
+2026-05-05 15:14:55,515 [INFO] HTTP Request: GET http://localhost:8000/api/tasks/task_0012 "HTTP/1.1 200 OK"
+2026-05-05 15:14:55,517 [INFO] HTTP Request: GET http://localhost:8000/api/tasks/task_0001 "HTTP/1.1 200 OK"
+2026-05-05 15:14:55,519 [INFO] HTTP Request: GET http://localhost:8000/api/tasks/task_0006 "HTTP/1.1 200 OK"
+2026-05-05 15:14:55,521 [INFO] HTTP Request: GET http://localhost:8000/api/tasks/task_0011 "HTTP/1.1 200 OK"
+2026-05-05 15:14:55,524 [INFO] HTTP Request: GET http://localhost:8000/api/tasks/task_0003 "HTTP/1.1 200 OK"
+2026-05-05 15:14:55,526 [INFO] HTTP Request: GET http://localhost:8000/api/tasks/task_0009 "HTTP/1.1 200 OK"
+2026-05-05 15:14:55,528 [INFO] HTTP Request: GET http://localhost:8000/api/tasks/task_0014 "HTTP/1.1 200 OK"
+2026-05-05 15:14:55,531 [INFO] HTTP Request: GET http://localhost:8000/api/tasks/task_0002 "HTTP/1.1 200 OK"
+2026-05-05 15:14:55,533 [INFO] HTTP Request: GET http://localhost:8000/api/tasks/task_0007 "HTTP/1.1 200 OK"
+2026-05-05 15:14:55,535 [INFO] HTTP Request: GET http://localhost:8000/api/tasks/task_0013 "HTTP/1.1 200 OK"
+2026-05-05 15:14:55,539 [INFO] HTTP Request: GET http://localhost:8000/api/tasks/task_0004 "HTTP/1.1 200 OK"
+2026-05-05 15:14:55,541 [INFO] HTTP Request: GET http://localhost:8000/api/tasks/task_0010 "HTTP/1.1 200 OK"
+2026-05-05 15:14:55,543 [INFO] HTTP Request: GET http://localhost:8000/api/tasks/task_0015 "HTTP/1.1 200 OK"
+2026-05-05 15:14:58,557 [INFO] 执行任务 task_0016: douyin txt#3 img#302
+2026-05-05 15:14:58,566 [INFO] HTTP Request: POST http://localhost:8000/api/tasks "HTTP/1.1 200 OK"
+2026-05-05 15:14:58,569 [INFO] HTTP Request: POST http://localhost:8000/api/tasks "HTTP/1.1 200 OK"
+2026-05-05 15:14:58,571 [INFO] HTTP Request: POST http://localhost:8000/api/tasks "HTTP/1.1 200 OK"
+2026-05-05 15:15:00,688 [INFO] 任务 task_0016 成功，记录结果
+2026-05-05 15:15:00,689 [INFO] 执行任务 task_0017: facebook txt#5 img#502
+2026-05-05 15:15:02,816 [INFO] 任务 task_0017 成功，记录结果
+2026-05-05 15:15:02,816 [INFO] 执行任务 task_0018: tiktok txt#2 img#202
+2026-05-05 15:15:04,943 [INFO] 任务 task_0018 成功，记录结果
+2026-05-05 15:15:13,853 [INFO] HTTP Request: GET http://localhost:8000/api/tasks/task_0016 "HTTP/1.1 200 OK"
+2026-05-05 15:15:13,855 [INFO] HTTP Request: GET http://localhost:8000/api/tasks/task_0017 "HTTP/1.1 200 OK"
+2026-05-05 15:15:13,857 [INFO] HTTP Request: GET http://localhost:8000/api/tasks/task_0018 "HTTP/1.1 200 OK"
