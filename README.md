@@ -5,6 +5,7 @@
 ## 📚 电子书 / E-Book
 
 **《三层结构体：工业级 AI 任务架构》**
+**Three-Layer Architecture: Industrial-Grade AI Task Architecture**
 
 - 🇳 中文在线阅读：https://yongchaoqiu111.github.io/agi-autoposter/
 - 🇬🇧 English Online Reading: https://yongchaoqiu111.github.io/agi-autoposter/en/
