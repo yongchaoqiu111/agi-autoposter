@@ -1,121 +1,50 @@
-# AGI AutoPoster - AI 多平台自动发帖系统
+# 三层结构体：工业级 AI 任务架构
 
-[![Python Version](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-
-##  电子书
+## 📖 电子书
 
 **《三层结构体：工业级 AI 任务架构》**
 
 在线阅读：https://yongchaoqiu111.github.io/agi-autoposter/
 
-AI 驱动的多平台自动发帖系统，采用三层结构体组合架构：监督中间层 + 分身调度 + 监控反馈闭环。
+---
 
-## 架构
+## 配套开源项目
 
-```
-调度层（大模型分身） → 审核监督中间层 → 执行层（Worker）
-         ↓                      ↓
-    发指令/等待接收          排队/执行/重试/超时强杀
-```
+本书所有架构思想，均有开源实现作为参考验证。
 
-## 快速开始
+**GitHub：** https://github.com/yongchaoqiu111/agi-autoposter
 
-### 安装
+**一键安装：**
 
 ```bash
-pip install agi-autoposter
+pip install Chaseqiu-agi-tool
 ```
 
-### 命令行演示
-
-```bash
-agi-autoposter-demo
-```
-
-### 源码安装
-
-```bash
-git clone https://github.com/yongchaoqiu111/agi-autoposter.git
-cd agi-autoposter
-pip install -e .
-```
-
-## 使用方式
-
-### 启动中间层
-
-```bash
-python -m agi_autoposter.middleware
-```
-
-中间层将在 `http://localhost:8000` 启动，提供以下 API：
-
-- `POST /api/tasks` - 创建任务
-- `GET /api/tasks` - 列出所有任务
-- `GET /api/tasks/{task_id}` - 查询任务状态
-- `GET /api/health` - 健康检查
-- `GET /api/success_cases` - 获取成功案例
-
-### 运行 Worker
-
-```bash
-python -m agi_autoposter.worker --platform douyin --txtid 1 --imgid 3 --auto
-```
-
-### 运行调度演示
-
-```bash
-python -m agi_autoposter.scheduler
-```
-
-### 运行分身调度演示
-
-```bash
-python -m agi_autoposter.demo.multi_scheduler_demo
-```
-
-### 运行内容层演示
-
-```bash
-python -m agi_autoposter.demo.content_layer_demo
-```
+---
 
 ## 项目结构
 
 ```
-agi_autoposter/
-├── __init__.py          # 包初始化
-├── middleware.py        # 审核监督中间层
-├── worker.py            # 执行层 Worker
-├── scheduler.py         # 调度层
-├── cli.py               # 命令行入口
-└── demo/
-    ├── __init__.py      # 演示入口
-    ├── multi_scheduler_demo.py  # 多分身调度演示
-    └── content_layer_demo.py    # 内容层演示
+agi-autoposter/
+├── sdk/                    # Python SDK 包
+│   ├── agi_autoposter/     # 核心代码
+│   ├── pyproject.toml      # 包配置
+│   └── README.md           # SDK 文档
+├── 电子书/                  # 电子书源文件
+│   └── book/               # MkDocs 电子书
+── README.md               # 本文件
 ```
 
-## 开发
+---
 
-```bash
-pip install -r requirements.txt
-```
+## 架构特点
 
-## 发布到 PyPI
+- **稳定优先** - 工业级系统需要确定性，而非可能性
+- **可控执行** - 三层结构体确保任务可靠执行
+- **原子化组合** - 灵活组合，适应不同场景
 
-### Windows
-
-```bash
-scripts\publish.bat
-```
-
-### Linux/Mac
-
-```bash
-bash scripts/publish.sh
-```
+---
 
 ## 许可证
 
-MIT License - 详见 [LICENSE](LICENSE) 文件
+MIT License
