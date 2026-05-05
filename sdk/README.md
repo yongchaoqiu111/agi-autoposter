@@ -1,0 +1,115 @@
+# AGI AutoPoster - AI 多平台自动发帖系统
+
+[![Python Version](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
+AI 驱动的多平台自动发帖系统，采用三层结构体组合架构：监督中间层 + 分身调度 + 监控反馈闭环。
+
+## 架构
+
+```
+调度层（大模型分身） → 审核监督中间层 → 执行层（Worker）
+         ↓                      ↓
+    发指令/等待接收          排队/执行/重试/超时强杀
+```
+
+## 快速开始
+
+### 安装
+
+```bash
+pip install agi-autoposter
+```
+
+### 命令行演示
+
+```bash
+agi-autoposter-demo
+```
+
+### 源码安装
+
+```bash
+git clone https://github.com/yongchaoqiu111/agi-autoposter.git
+cd agi-autoposter
+pip install -e .
+```
+
+## 使用方式
+
+### 启动中间层
+
+```bash
+python -m agi_autoposter.middleware
+```
+
+中间层将在 `http://localhost:8000` 启动，提供以下 API：
+
+- `POST /api/tasks` - 创建任务
+- `GET /api/tasks` - 列出所有任务
+- `GET /api/tasks/{task_id}` - 查询任务状态
+- `GET /api/health` - 健康检查
+- `GET /api/success_cases` - 获取成功案例
+
+### 运行 Worker
+
+```bash
+python -m agi_autoposter.worker --platform douyin --txtid 1 --imgid 3 --auto
+```
+
+### 运行调度演示
+
+```bash
+python -m agi_autoposter.scheduler
+```
+
+### 运行分身调度演示
+
+```bash
+python -m agi_autoposter.demo.multi_scheduler_demo
+```
+
+### 运行内容层演示
+
+```bash
+python -m agi_autoposter.demo.content_layer_demo
+```
+
+## 项目结构
+
+```
+agi_autoposter/
+├── __init__.py          # 包初始化
+├── middleware.py        # 审核监督中间层
+├── worker.py            # 执行层 Worker
+├── scheduler.py         # 调度层
+├── cli.py               # 命令行入口
+└── demo/
+    ├── __init__.py      # 演示入口
+    ├── multi_scheduler_demo.py  # 多分身调度演示
+    └── content_layer_demo.py    # 内容层演示
+```
+
+## 开发
+
+```bash
+pip install -r requirements.txt
+```
+
+## 发布到 PyPI
+
+### Windows
+
+```bash
+scripts\publish.bat
+```
+
+### Linux/Mac
+
+```bash
+bash scripts/publish.sh
+```
+
+## 许可证
+
+MIT License - 详见 [LICENSE](LICENSE) 文件

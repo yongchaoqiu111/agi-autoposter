@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Chaseqiu-agi-tool"
+version = "0.1.0"
+description = "AI 多平台自动发帖系统 | 三层结构体组合架构 | 监督中间层 + 分身调度 + 监控反馈闭环"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Chaseqiu", email = "86609013@qq.com"}
+]
+requires-python = ">=3.9"
+dependencies = [
+    "fastapi>=0.104.0",
+    "uvicorn>=0.24.0",
+    "pydantic>=2.0.0",
+    "httpx>=0.25.0",
+]
+
+[project.scripts]
+chaseqiu-agi-demo = "agi_autoposter.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["agi_autoposter*"]

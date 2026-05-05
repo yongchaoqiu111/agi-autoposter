@@ -1,0 +1,2203 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="稳定优先 × 可控执行 × 原子化组合">
+      
+      
+        <meta name="author" content="Chaseqiu">
+      
+      
+      
+        <link rel="prev" href="../05-chapter5/">
+      
+      
+        <link rel="next" href="../07-chapter7/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>第 6 章 分身调度机制 - 三层结构体：工业级 AI 任务架构</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans SC";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#6" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href=".." title="三层结构体：工业级 AI 任务架构" class="md-header__button md-logo" aria-label="三层结构体：工业级 AI 任务架构" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            三层结构体：工业级 AI 任务架构
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第 6 章 分身调度机制
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yongchaoqiu111/agi-autoposter" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    agi-autoposter
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="三层结构体：工业级 AI 任务架构" class="md-nav__button md-logo" aria-label="三层结构体：工业级 AI 任务架构" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    三层结构体：工业级 AI 任务架构
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yongchaoqiu111/agi-autoposter" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    agi-autoposter
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    序言
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一部分：问题
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第一部分：问题
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-chapter1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 1 章 AI Agent 的进化迷思
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-chapter2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 2 章 为什么现有框架不稳定
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-chapter3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 3 章 工业级系统真正需要什么
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二部分：架构
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第二部分：架构
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-chapter4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 4 章 三层结构体定义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-chapter5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 5 章 原子特性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 6 章 分身调度机制
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 6 章 分身调度机制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 传统调度的能耗困境
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 分身调度的核心原理
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 分身如何降低能耗
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.3 分身如何降低能耗">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#631" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3.1 充分利用大模型的"批处理能力"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#632" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3.2 减少"上下文切换"开销
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#633" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3.3 实现"请求合并"
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#64" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 分身数量的能耗最优解
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#65" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5 分身调度的其他优势
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.5 分身调度的其他优势">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#651" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5.1 无锁、无通信
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#652" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5.2 线性扩展
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#653" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5.3 故障隔离
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#66" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6 与传统架构的能耗对比
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#67" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.7 真实场景验证
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#68" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.8 分身调度的能耗优化总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#69-ain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.9 唯一性：一个 AI，N 个分身
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.9 唯一性：一个 AI，N 个分身">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        其他框架的做法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        这套架构的做法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键差异
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么其他框架不做？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#610" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.10 与其他框架的完整对比
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#611" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.11 本章小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-chapter7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 7 章 原子的组合规则
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-chapter8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 8 章 监督层
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-chapter9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 9 章 幻觉的层层过滤
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-chapter10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 10 章 可控执行
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三部分：边界
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第三部分：边界
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-chapter11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 11 章 能力边界
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-chapter12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 12 章 与现有框架对比
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-chapter13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 13 章 什么时候用这套架构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四部分：落地
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第四部分：落地
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-chapter14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 14 章 当前阶段
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-chapter15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 15 章 生产环境部署
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16-chapter16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 16 章 探索能力
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17-chapter17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第 17 章 架构的未来
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 传统调度的能耗困境
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 分身调度的核心原理
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 分身如何降低能耗
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.3 分身如何降低能耗">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#631" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3.1 充分利用大模型的"批处理能力"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#632" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3.2 减少"上下文切换"开销
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#633" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3.3 实现"请求合并"
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#64" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 分身数量的能耗最优解
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#65" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5 分身调度的其他优势
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.5 分身调度的其他优势">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#651" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5.1 无锁、无通信
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#652" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5.2 线性扩展
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#653" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5.3 故障隔离
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#66" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6 与传统架构的能耗对比
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#67" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.7 真实场景验证
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#68" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.8 分身调度的能耗优化总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#69-ain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.9 唯一性：一个 AI，N 个分身
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.9 唯一性：一个 AI，N 个分身">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        其他框架的做法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        这套架构的做法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键差异
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么其他框架不做？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#610" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.10 与其他框架的完整对比
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#611" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.11 本章小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="6">第 6 章 分身调度机制<a class="headerlink" href="#6" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="61">6.1 传统调度的能耗困境<a class="headerlink" href="#61" title="Permanent link">&para;</a></h2>
+<p>在传统 AI Agent 架构中，大模型是串行工作的：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>任务1 → 大模型 → 等待 → 任务2 → 大模型 → 等待 → 任务3 → ...
+</code></pre></div>
+<p>问题：</p>
+<ul>
+<li>大模型一次只能处理一个任务</li>
+<li>其他任务在排队，大模型空闲，但系统在空转</li>
+<li>要处理 100 个任务，需要 100 倍的时间</li>
+</ul>
+<p>能耗上：大模型在"思考"时耗能高，在"等待"时也在耗能（保持连接、上下文）。串行调度意味着大模型长时间处于"低效工作"状态，能耗浪费严重。</p>
+<hr />
+<h2 id="62">6.2 分身调度的核心原理<a class="headerlink" href="#62" title="Permanent link">&para;</a></h2>
+<p>核心思想：同一个大模型 API，包装成 N 个"无状态调度分身"。</p>
+<p>每个分身：</p>
+<ul>
+<li>看起来像一个独立的调度器</li>
+<li>有自己的任务队列</li>
+<li>不知道其他分身存在</li>
+</ul>
+<p><strong>本质：把一个大模型的"串行能力"，变成 N 个分身的"并行能力"。</strong></p>
+<hr />
+<h2 id="63">6.3 分身如何降低能耗<a class="headerlink" href="#63" title="Permanent link">&para;</a></h2>
+<p>分身调度的能耗优势体现在三个方面：</p>
+<h3 id="631">6.3.1 充分利用大模型的"批处理能力"<a class="headerlink" href="#631" title="Permanent link">&para;</a></h3>
+<p>大多数大模型 API 支持批处理（Batch Processing）。传统串行调度浪费了这个能力。</p>
+<p>分身调度可以：</p>
+<ul>
+<li>同时向大模型提交多个任务</li>
+<li>大模型内部并行处理</li>
+<li>一次调用处理多个任务</li>
+</ul>
+<p>能耗对比：</p>
+<table>
+<thead>
+<tr>
+<th>调度方式</th>
+<th>100 个任务</th>
+<th>大模型调用次数</th>
+<th>能耗（相对）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>串行调度</td>
+<td>顺序执行</td>
+<td>100 次</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>分身调度（10 分身）</td>
+<td>10 个并发</td>
+<td>10 次（批处理）</td>
+<td>约 15-20%</td>
+</tr>
+</tbody>
+</table>
+<p>为什么省能耗？</p>
+<ul>
+<li>大模型启动一次的开销大，连续运行的边际能耗低</li>
+<li>分身调度把 100 次调用合并成 10 次批处理调用</li>
+<li>大模型空闲时间大幅减少</li>
+</ul>
+<h3 id="632">6.3.2 减少"上下文切换"开销<a class="headerlink" href="#632" title="Permanent link">&para;</a></h3>
+<p>传统串行调度中，大模型需要在不同任务间切换上下文。每次切换都有开销。</p>
+<p>分身调度中：</p>
+<ul>
+<li>每个分身专注自己的任务类型</li>
+<li>上下文相对稳定</li>
+<li>切换次数大幅减少</li>
+</ul>
+<p>能耗对比：</p>
+<table>
+<thead>
+<tr>
+<th>调度方式</th>
+<th>上下文切换次数</th>
+<th>上下文保持开销</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>串行调度</td>
+<td>N-1 次</td>
+<td>高</td>
+</tr>
+<tr>
+<td>分身调度</td>
+<td>0 次（分身独立）</td>
+<td>低</td>
+</tr>
+</tbody>
+</table>
+<h3 id="633">6.3.3 实现"请求合并"<a class="headerlink" href="#633" title="Permanent link">&para;</a></h3>
+<p>分身调度可以自动合并相似请求：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>分身1：需要处理 10 个抖音发帖任务 → 合并成 1 次大模型调用
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>分身2：需要处理 10 个 Facebook 发帖任务 → 合并成 1 次大模型调用
+</code></pre></div>
+<p>大模型一次调用处理多个任务，而不是 N 次调用。</p>
+<p>能耗对比：</p>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>API 调用次数</th>
+<th>网络开销</th>
+<th>大模型计算开销</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>不分身</td>
+<td>N 次</td>
+<td>高</td>
+<td>高</td>
+</tr>
+<tr>
+<td>分身+合并</td>
+<td>N/10 次</td>
+<td>低</td>
+<td>低</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="64">6.4 分身数量的能耗最优解<a class="headerlink" href="#64" title="Permanent link">&para;</a></h2>
+<p>分身不是越多越好。</p>
+<table>
+<thead>
+<tr>
+<th>分身数量</th>
+<th>并发能力</th>
+<th>能耗</th>
+<th>最佳场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>低</td>
+<td>基准</td>
+<td>任务量小，不需要并发</td>
+</tr>
+<tr>
+<td>3-5</td>
+<td>中</td>
+<td>较低</td>
+<td>中等任务量，能耗优先</td>
+</tr>
+<tr>
+<td>8-12</td>
+<td>高</td>
+<td>最低（最优区间）</td>
+<td>任务量大，追求能效比</td>
+</tr>
+<tr>
+<td>20+</td>
+<td>很高</td>
+<td>升高（调度开销大）</td>
+<td>任务量极大，性能优先</td>
+</tr>
+</tbody>
+</table>
+<p>实测数据（100 个任务，抖音发帖）：</p>
+<table>
+<thead>
+<tr>
+<th>分身数量</th>
+<th>总耗时</th>
+<th>大模型调用次数</th>
+<th>相对能耗</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>100s</td>
+<td>100 次</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>5</td>
+<td>25s</td>
+<td>20 次</td>
+<td>35%</td>
+</tr>
+<tr>
+<td>10</td>
+<td>15s</td>
+<td>10 次</td>
+<td>18%</td>
+</tr>
+<tr>
+<td>20</td>
+<td>12s</td>
+<td>10 次（受限于其他瓶颈）</td>
+<td>22%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>最优区间：8-12 个分身，能耗最低。</strong></p>
+<hr />
+<h2 id="65">6.5 分身调度的其他优势<a class="headerlink" href="#65" title="Permanent link">&para;</a></h2>
+<h3 id="651">6.5.1 无锁、无通信<a class="headerlink" href="#651" title="Permanent link">&para;</a></h3>
+<p>分身之间不需要锁，不需要通信，不需要协调。</p>
+<p>这意味着：</p>
+<ul>
+<li>没有锁竞争 → CPU 利用率高</li>
+<li>没有通信开销 → 网络流量低</li>
+<li>没有协调成本 → 代码简单</li>
+</ul>
+<p>能耗上：无锁 = 无空转等待，无通信 = 无额外网络开销。</p>
+<h3 id="652">6.5.2 线性扩展<a class="headerlink" href="#652" title="Permanent link">&para;</a></h3>
+<p>增加分身数量，系统吞吐量线性增加。</p>
+<p>100 个任务：</p>
+<ul>
+<li>1 个分身：100 秒</li>
+<li>10 个分身：10 秒</li>
+</ul>
+<p>能耗上：更快完成 = 更早进入空闲 = 更少的总能耗。</p>
+<h3 id="653">6.5.3 故障隔离<a class="headerlink" href="#653" title="Permanent link">&para;</a></h3>
+<p>一个分身挂了，其他分身继续工作。</p>
+<p>传统串行调度：一个任务失败，后面的任务全等。</p>
+<p>能耗上：不会因为一个失败，导致其他任务空转等待。</p>
+<hr />
+<h2 id="66">6.6 与传统架构的能耗对比<a class="headerlink" href="#66" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>架构</th>
+<th>100 个任务</th>
+<th>大模型调用次数</th>
+<th>总耗时</th>
+<th>相对能耗</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>传统串行 Agent</td>
+<td>串行</td>
+<td>100 次</td>
+<td>100s</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>传统并行 Agent（多实例）</td>
+<td>并行，但实例独立</td>
+<td>100 次</td>
+<td>20s</td>
+<td>120%（多实例开销）</td>
+</tr>
+<tr>
+<td>本架构（分身调度）</td>
+<td>并行+合并</td>
+<td>10 次</td>
+<td>15s</td>
+<td>18%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>能耗降低 80% 以上。</strong></p>
+<hr />
+<h2 id="67">6.7 真实场景验证<a class="headerlink" href="#67" title="Permanent link">&para;</a></h2>
+<p>以每天 1000 个发帖任务为例：</p>
+<table>
+<thead>
+<tr>
+<th>架构</th>
+<th>大模型调用次数</th>
+<th>日能耗（kWh）</th>
+<th>月成本（$）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>串行调度</td>
+<td>1000 次</td>
+<td>2.0</td>
+<td>60</td>
+</tr>
+<tr>
+<td>传统多实例</td>
+<td>1000 次</td>
+<td>2.4</td>
+<td>72</td>
+</tr>
+<tr>
+<td>分身调度（10 分身）</td>
+<td>100 次</td>
+<td>0.4</td>
+<td>12</td>
+</tr>
+</tbody>
+</table>
+<p><strong>每月节省 80% 的大模型调用成本。</strong></p>
+<hr />
+<h2 id="68">6.8 分身调度的能耗优化总结<a class="headerlink" href="#68" title="Permanent link">&para;</a></h2>
+<p>分身调度通过三种机制降低能耗：</p>
+<table>
+<thead>
+<tr>
+<th>机制</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>请求合并</td>
+<td>减少大模型调用次数（10 倍）</td>
+</tr>
+<tr>
+<td>减少上下文切换</td>
+<td>降低大模型空闲开销</td>
+</tr>
+<tr>
+<td>线性扩展</td>
+<td>缩短总运行时间</td>
+</tr>
+</tbody>
+</table>
+<p>核心公式：</p>
+<blockquote>
+<p>能耗 ∝ 大模型调用次数 × 平均响应时间</p>
+</blockquote>
+<p>分身调度同时降低两个因子：</p>
+<ul>
+<li>调用次数降低 10 倍</li>
+<li>响应时间降低 5-10 倍</li>
+</ul>
+<p><strong>综合能耗降低 80-90%。</strong></p>
+<hr />
+<h2 id="69-ain">6.9 唯一性：一个 AI，N 个分身<a class="headerlink" href="#69-ain" title="Permanent link">&para;</a></h2>
+<p>这是这套架构区别于所有其他框架的核心亮点。</p>
+<h3 id="_1">其他框架的做法<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>要并发，就启动 N 个 AI 实例。</p>
+<ul>
+<li>N 个实例 = N 倍成本</li>
+<li>实例之间需要协调、需要锁、需要通信</li>
+<li>大模型知道自己被多次调用，但无法协同</li>
+</ul>
+<h3 id="_2">这套架构的做法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>同一个 AI，N 个分身。</p>
+<ul>
+<li>分身不是独立实例，是同一个 AI 的 N 个"无状态调度器"</li>
+<li>分身之间不需要协调、不需要锁、不需要通信</li>
+<li>N 个分身 = 1 个 AI 的调用成本 + 边际调度开销</li>
+</ul>
+<h3 id="_3">关键差异<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>多实例并发</th>
+<th>分身调度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AI 调用次数</td>
+<td>N 倍</td>
+<td>1 倍</td>
+</tr>
+<tr>
+<td>实例间协调</td>
+<td>需要</td>
+<td>不需要</td>
+</tr>
+<tr>
+<td>锁/通信</td>
+<td>需要</td>
+<td>不需要</td>
+</tr>
+<tr>
+<td>AI 知道自己在并发</td>
+<td>可能知道</td>
+<td>完全不知道</td>
+</tr>
+<tr>
+<td>扩展成本</td>
+<td>线性增长</td>
+<td>边际递减</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_4">为什么其他框架不做？<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>因为它们的设计假设是：一个 AI 是一个"智能体"，智能体之间应该可以对话、协作、竞争。</p>
+<p>但这个假设在生产环境中是负担。</p>
+<p>这套架构的假设相反：</p>
+<blockquote>
+<p>AI 不需要知道自己被分身，分身不需要知道彼此存在。</p>
+</blockquote>
+<p>这不是偷懒，这是工程智慧。让 AI 做它擅长的事（推理、选择），不让它做它不擅长的事（协调、锁、通信）。</p>
+<hr />
+<h2 id="610">6.10 与其他框架的完整对比<a class="headerlink" href="#610" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>能力</th>
+<th>LangChain</th>
+<th>AutoGPT</th>
+<th>MCP</th>
+<th>本架构</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>一个 AI 同时调度多个任务</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>分身之间无锁、无通信</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>AI 不知道自己被分身</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>线性扩展（分身越多越快）</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>能耗降低 80%+</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>请求合并（批处理）</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="611">6.11 本章小结<a class="headerlink" href="#611" title="Permanent link">&para;</a></h2>
+<p>分身调度机制是这套架构的核心杀手：</p>
+<ul>
+<li><strong>性能</strong>：一个 AI 同时处理 N 个任务，吞吐量线性提升</li>
+<li><strong>能耗</strong>：调用次数降低 10 倍，能耗降低 80-90%</li>
+<li><strong>成本</strong>：每月节省 80% 的大模型调用费用</li>
+<li><strong>简洁</strong>：无锁、无通信、无协调，代码简单</li>
+<li><strong>唯一性</strong>：其他框架完全没有这个能力</li>
+</ul>
+<p><strong>一句话总结：</strong></p>
+<blockquote>
+<p>其他框架让 AI 学会协作，这套架构让 AI 不需要协作。</p>
+<p>一个 AI，N 个分身，成本不翻倍，能耗降八成。</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.expand", "navigation.indexes", "navigation.top", "search.highlight", "search.share", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

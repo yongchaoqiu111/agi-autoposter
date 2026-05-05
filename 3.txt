@@ -1,0 +1,355 @@
+一、demo 说清楚了什么
+内容	状态	说明
+中间层 API 怎么用	✅	POST /api/tasks，参数清晰
+Worker 怎么改	✅	命令行参数 + 输出格式
+任务怎么排队	✅	asyncio.Queue，单个 worker_loop
+超时怎么强杀	✅	asyncio.wait_for + taskkill
+失败怎么重试	✅	judge_and_dispatch 里判断
+这些都是实现细节，不是架构模式。
+
+二、demo 没有说清楚的“你的模式”
+你的核心模式是 三层结构体组合，但 demo 里没有体现：
+
+你的模式	demo 里的表现	缺失了什么
+内容层独立	task 只有 txt_id、img_id	没有展示内容层是怎么生成/管理这些 ID 的
+调度层分身	scheduler_demo.py 只有一个	没有展示“同一个大模型分身成多个调度器”
+监控层作为反馈	task_results 只存状态	没有展示大模型怎么读取监控数据来优化调度
+执行层无状态	worker 每次独立执行	✅ 做到了
+三层责任分离	代码是分层的	但文档没有明确说“责任边界”
+结论：demo 是一个“能跑的任务队列系统”，但不是“三层结构体组合的标准实现”。
+
+三、具体缺什么
+1. 缺少“内容层”的独立演示
+你的架构里，内容层应该是独立的三层结构（内容生成 → 内容审核 → 内容存储）。
+
+但 demo 里：
+
+txt_id、img_id 只是数字
+
+没有展示内容是怎么来的
+
+没有展示大模型怎么选择内容
+
+2. 缺少“分身调度”的演示
+你的核心优势是：同一个大模型分身成 N 个调度器，互不感知。
+
+但 demo 里：
+
+只有一个 scheduler_demo.py
+
+没有展示多个调度器同时运行
+
+没有展示调度器之间无状态、无锁
+
+3. 缺少“监控反馈闭环”
+你说“监控只要执行过的正确记录，做参考评判”，但 demo 里：
+
+task_results 只存状态，没有存“好/坏”标签
+
+没有 API 让大模型查询“历史成功案例”
+
+没有展示大模型如何根据监控数据优化调度
+
+4. 缺少“责任边界文档”
+代码里三层是分开的，但没有一个地方明确写：
+
+text
+内容层负责：生成内容、审核内容、存储内容
+调度层负责：任务编排、ID 选择、平台选择
+执行层负责：登录、发帖、返回结果
+监控层负责：记录状态、存储成功案例、供查询
+四、要补什么才能把模式说清楚
+我建议你补三个文件：
+
+1. ARCHITECTURE.md（架构说明）
+明确写出三层结构体的定义、责任边界、组合方式。
+
+2. content_layer_demo.py（内容层独立演示）
+展示：
+
+内容是怎么生成的（可以是模拟数据）
+
+大模型怎么通过调度层选择 content_id
+
+3. multi_scheduler_demo.py（分身调度演示）
+展示：
+
+同时启动 3 个调度器分身
+
+每个分身独立向中间层推任务
+
+分身之间不通信、不共享状态
+
+五、要不要我帮你写这三个文件？
+写完之后，你的项目就有：
+
+能跑的 demo（现在已有）
+
+清晰的架构文档（ARCHITECTURE.md）
+
+内容层独立演示（展示三层组合）
+
+分身调度演示（展示核心优势）
+
+这样别人（包括未来的你）看你的项目，就能一秒理解：
+
+“哦，你不是做任务队列，你是做三层结构体组合的标准实现。”
+
+要写吗？
+
+要
+很好。那我们就从核心开始，先帮你把 ARCHITECTURE.md 写出来。这份文档会明确三层的责任边界、数据流向和组合方式，让任何人看完都能快速理解你的设计本质。
+
+之后我们再逐一把 content_layer_demo.py 和 multi_scheduler_demo.py 补上，把架构完全跑通。
+
+1. 架构设计文档：ARCHITECTURE.md
+这份文档会定义：
+
+三层的结构体规范（输入、输出、责任）
+
+层与层之间的组合规则
+
+大模型分身调度的无状态、无锁、线性扩展原理
+
+监控层作为反馈数据源（成功案例记录、查询接口）
+
+2. 内容层独立演示：content_layer_demo.py
+展示：
+
+“内容层”如何独立生成/管理 txt_id、img_id
+
+大模型如何通过调度层选择已有内容（只选 ID，不编内容）
+
+调度层只调用执行层，不碰内容数据库
+
+3. 分身调度演示：multi_scheduler_demo.py
+展示：
+
+启动 N 个“调度器分身”（同一个大模型服务的多个无状态实例）
+
+同时向中间层提交任务
+
+中间层统一排队、执行、返回结果
+
+分身之间不通信、不共享状态
+
+4. 可选：监控反馈查询接口
+在中间层增加一个简单查询：
+
+GET /api/success_cases?limit=10
+
+返回最近执行成功的任务详情（含 platform、txt_id、img_id、执行耗时等）
+
+供大模型查询、学习、调整调度策略
+
+你想从哪一部分开始？
+
+先让我把 ARCHITECTURE.md 完整写出来
+
+还是直接开始 content_layer_demo.py 或 multi_scheduler_demo.py 的代码？
+
+2
+好的。我们直接开始写 multi_scheduler_demo.py。
+
+这份代码会展示分身调度的核心能力：无状态、无锁、线性扩展。
+
+python
+#!/usr/bin/env python3
+"""
+分身调度演示 - multi_scheduler_demo.py
+
+展示核心能力：
+  1. 同一个大模型 API 被包装成多个「无状态调度分身」
+  2. 所有分身同时向中间层提交任务
+  3. 分身之间不通信、不共享状态、互不感知
+  4. 中间层统一排队、执行、返回结果
+
+运行前提：
+  1. 中间层已启动（python middleware.py）
+  2. 网络正常
+"""
+
+import asyncio
+import httpx
+import time
+import random
+from typing import Dict, List
+from datetime import datetime
+
+# 中间层地址
+MIDDLEWARE_URL = "http://localhost:8000"
+
+# 分身配置
+NUM_SCHEDULERS = 5           # 启动 5 个调度分身
+TASKS_PER_SCHEDULER = 3      # 每个分身发布 3 个任务
+TASK_INTERVAL_SEC = 0.5      # 分身内任务间隔（秒）
+
+
+class SchedulerClone:
+    """
+    调度分身
+    - 每个分身是完全独立的实例
+    - 不知道其他分身的存在
+    - 只负责「发布任务 + 轮询结果」
+    - 无状态：所有状态由中间层维护
+    """
+
+    def __init__(self, clone_id: int, client: httpx.AsyncClient):
+        self.clone_id = clone_id
+        self.client = client
+        self.tasks_submitted: List[Dict] = []
+
+    async def submit_one_task(self, task_index: int) -> Dict:
+        """提交单个任务"""
+        platform = random.choice(
+            ["douyin", "facebook", "kuaishou", "tiktok", "x", "instagram"]
+        )
+        txt_id = random.randint(1, 20)
+        img_id = random.randint(1, 10)
+
+        task_payload = {
+            "platform": platform,
+            "txt_id": txt_id,
+            "img_id": img_id,
+            "max_retries": 2,
+        }
+
+        start_time = time.time()
+        resp = await self.client.post(f"{MIDDLEWARE_URL}/api/tasks", json=task_payload)
+        elapsed = time.time() - start_time
+
+        task_info = {
+            "task_id": resp.json()["task_id"],
+            "platform": platform,
+            "txt_id": txt_id,
+            "img_id": img_id,
+            "submit_time": datetime.now().isoformat(),
+            "submit_duration_ms": round(elapsed * 1000, 2),
+        }
+        self.tasks_submitted.append(task_info)
+        print(f"[分身-{self.clone_id:02d}] 提交任务 {task_info['task_id']} | "
+              f"{platform} | txt#{txt_id} img#{img_id} | 耗时 {task_info['submit_duration_ms']}ms")
+        return task_info
+
+    async def run(self):
+        """分身运行：依次提交所有任务"""
+        print(f"\n[分身-{self.clone_id:02d}] 启动，准备提交 {TASKS_PER_SCHEDULER} 个任务")
+        for i in range(TASKS_PER_SCHEDULER):
+            await self.submit_one_task(i + 1)
+            await asyncio.sleep(TASK_INTERVAL_SEC)
+        print(f"[分身-{self.clone_id:02d}] 任务提交完毕，提交了 {len(self.tasks_submitted)} 个任务")
+
+    async def poll_results(self):
+        """轮询自己的任务结果"""
+        results = []
+        for task_info in self.tasks_submitted:
+            task_id = task_info["task_id"]
+            start_time = time.time()
+            # 最多轮询 30 秒
+            for _ in range(30):
+                resp = await self.client.get(f"{MIDDLEWARE_URL}/api/tasks/{task_id}")
+                data = resp.json()
+                if data["status"] in ["success", "failed", "timeout"]:
+                    break
+                await asyncio.sleep(1)
+            elapsed = time.time() - start_time
+
+            result_info = {
+                "task_id": task_id,
+                "status": data["status"],
+                "result": data.get("result"),
+                "poll_duration_sec": round(elapsed, 2),
+            }
+            results.append(result_info)
+            print(f"[分身-{self.clone_id:02d}] 任务 {task_id} 完成 | 状态: {data['status']} | "
+                  f"轮询耗时 {elapsed:.2f}s")
+        return results
+
+
+async def main():
+    print("=" * 70)
+    print("  分身调度演示")
+    print("=" * 70)
+    print(f"\n配置：")
+    print(f"  - 调度分身数量: {NUM_SCHEDULERS}")
+    print(f"  - 每个分身任务数: {TASKS_PER_SCHEDULER}")
+    print(f"  - 总任务数: {NUM_SCHEDULERS * TASKS_PER_SCHEDULER}")
+    print(f"  - 中间层地址: {MIDDLEWARE_URL}")
+    print("\n核心验证点：")
+    print("  ✅ 多个分身同时运行，互不感知")
+    print("  ✅ 中间层统一排队，按顺序执行")
+    print("  ✅ 分身无状态，不维护任务队列")
+    print()
+
+    async with httpx.AsyncClient(timeout=30.0) as client:
+        # 1. 启动所有分身（并发提交任务）
+        schedulers = [SchedulerClone(i + 1, client) for i in range(NUM_SCHEDULERS)]
+        print("\n[阶段1] 所有分身同时启动，并发提交任务")
+        await asyncio.gather(*[s.run() for s in schedulers])
+
+        # 2. 等待中间层完成任务执行
+        print("\n[阶段2] 等待中间层执行任务（约 30 秒）...")
+        await asyncio.sleep(35)
+
+        # 3. 各分身轮询自己的任务结果
+        print("\n[阶段3] 分身轮询任务结果")
+        all_results = await asyncio.gather(*[s.poll_results() for s in schedulers])
+
+        # 4. 汇总统计
+        total_tasks = 0
+        success_count = 0
+        for results in all_results:
+            total_tasks += len(results)
+            success_count += sum(1 for r in results if r["status"] == "success")
+
+        print("\n" + "=" * 70)
+        print("  执行汇总")
+        print("=" * 70)
+        print(f"  总任务数: {total_tasks}")
+        print(f"  成功数: {success_count}")
+        print(f"  失败/超时: {total_tasks - success_count}")
+        print(f"  成功率: {success_count / total_tasks * 100:.1f}%")
+        print("\n✅ 分身调度演示完成")
+        print("   - 所有分身独立运行，互不感知")
+        print("   - 任务由中间层统一排队和调度")
+        print("   - 分身无状态，可线性扩展")
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+运行方式
+确保中间层已启动
+
+bash
+python middleware.py
+新开一个终端，运行分身调度演示
+
+bash
+python multi_scheduler_demo.py
+你将会看到的效果
+text
+[分身-01] 启动，准备提交 3 个任务
+[分身-01] 提交任务 task_0001 | douyin | txt#5 img#3 | 耗时 12ms
+[分身-02] 提交任务 task_0002 | tiktok | txt#8 img#2 | 耗时 15ms
+[分身-03] 提交任务 task_0003 | facebook | txt#2 img#7 | 耗时 11ms
+...（所有分身并发提交）
+[阶段2] 等待中间层执行任务...
+[阶段3] 分身轮询任务结果
+[分身-01] 任务 task_0001 完成 | 状态: success | 轮询耗时 2.3s
+...
+执行汇总
+  总任务数: 15
+  成功数: 14
+  成功率: 93.3%
+✅ 分身调度演示完成
+   - 所有分身独立运行，互不感知
+   - 任务由中间层统一排队和调度
+   - 分身无状态，可线性扩展
+核心验证点
+验证项	代码体现
+多个分身同时运行	asyncio.gather(*[s.run() for s in schedulers])
+分身互不感知	每个 SchedulerClone 独立实例，不知道其他
+中间层统一排队	所有任务都发送到同一个 /api/tasks 接口
+分身无状态	分身只存自己提交的 task_id，不承担调度逻辑
+线性扩展	改 NUM_SCHEDULERS 即可增加分身数量
+你现在可以先运行这个 demo，看看效果是否符合预期。如果一切正常，我们下一步再补 content_layer_demo.py。

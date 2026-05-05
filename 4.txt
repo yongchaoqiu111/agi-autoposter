@@ -1,0 +1,172 @@
+第一步：创建新目录结构
+Prompt：
+
+text
+帮我为 Python 项目 `agi-autoposter` 创建以下目录结构：
+
+agi-autoposter/
+├── agi_autoposter/
+│   ├── __init__.py
+│   ├── middleware.py
+│   ├── worker.py
+│   ├── scheduler.py
+│   ├── cli.py
+│   └── demo/
+│       ├── __init__.py
+│       ├── multi_scheduler_demo.py
+│       └── content_layer_demo.py
+├── tests/
+├── pyproject.toml
+├── README.md
+└── requirements.txt
+
+请生成一个 shell 脚本（Linux/Mac）或批处理文件（Windows）来创建这个结构。
+第二步：生成 pyproject.toml
+Prompt：
+
+text
+请为 AGI AutoPoster 项目生成一个 `pyproject.toml` 文件。
+
+项目信息：
+- 名称：agi-autoposter
+- 版本：0.1.0
+- 描述：AI 多平台自动发帖系统 | 三层结构体组合架构 | 监督中间层 + 分身调度 + 监控反馈闭环
+- 作者：yongchaoqiu111
+- 邮箱：86609013@qq.com
+- 许可证：MIT
+- Python 版本要求：>=3.9
+- 依赖：fastapi, uvicorn, pydantic, httpx
+
+需要配置命令行入口：`agi-autoposter-demo` 指向 `agi_autoposter.cli:main`
+第三步：生成 cli.py
+Prompt：
+
+text
+请为 AGI AutoPoster 生成 `agi_autoposter/cli.py` 文件。
+
+要求：
+1. 定义 `main()` 函数作为命令行入口
+2. 打印欢迎信息："AGI AutoPoster Demo - 三层结构体组合架构"
+3. 调用 demo 模块中的 `run_demo()` 函数来启动演示（包括启动 middleware 和运行调度演示）
+4. 使用 asyncio 运行异步函数
+5. 处理 KeyboardInterrupt 异常，打印友好的退出信息
+第四步：生成 __init__.py
+Prompt：
+
+text
+请为 `agi_autoposter/__init__.py` 生成内容。
+
+要求：
+1. 定义版本号 `__version__ = "0.1.0"`
+2. 从 middleware 导出核心类或函数（如果有）
+3. 从 cli 导出 main 函数
+4. 保持简洁，只导出必要的公共接口
+第五步：生成 demo 模块的 __init__.py
+Prompt：
+
+text
+请为 `agi_autoposter/demo/__init__.py` 生成内容。
+
+要求：
+1. 定义 `run_demo()` 异步函数
+2. 该函数应该：
+   - 打印演示标题
+   - 启动 middleware（在后台运行）
+   - 等待 2 秒让 middleware 启动
+   - 运行调度演示（提交任务并查询结果）
+   - 等待所有任务完成
+   - 打印演示完成信息
+3. 处理端口占用等异常情况
+4. 确保演示结束后不留下后台进程
+第六步：迁移现有代码到新文件
+Prompt：
+
+text
+我有以下现有文件，需要迁移到新的包结构中：
+
+1. `middleware.py` → 移动到 `agi_autoposter/middleware.py`
+   - 保持原有代码不变
+   - 添加 `if __name__ == "__main__":` 块可以直接运行
+
+2. `worker_template.py` → 移动到 `agi_autoposter/worker.py`
+   - 重命名为 worker.py
+   - 保持原有功能
+
+3. `scheduler_demo.py` 的逻辑 → 整合到 `agi_autoposter/demo/multi_scheduler_demo.py`
+   - 保持原有多分身调度的演示逻辑
+
+4. `content_layer_demo.py` → 移动到 `agi_autoposter/demo/content_layer_demo.py`
+   - 保持原有内容层演示逻辑
+
+请告诉我如何调整这些文件以适配新的包结构，特别是 import 路径。
+第七步：更新 requirements.txt
+Prompt：
+
+text
+请为 AGI AutoPoster 生成 `requirements.txt` 文件。
+
+需要包含：
+- fastapi>=0.104.0
+- uvicorn>=0.24.0
+- pydantic>=2.0.0
+- httpx>=0.25.0
+
+同时包含开发依赖（可选）：
+- pytest>=7.0.0
+- black
+- isort
+- mypy
+第八步：更新 README.md
+Prompt：
+
+text
+请更新 `README.md`，在开头添加 pip 安装方式：
+
+```bash
+pip install agi-autoposter
+添加命令行演示：
+
+bash
+agi-autoposter-demo
+保留原有的源码安装方式作为备选。
+
+text
+
+---
+
+## 第九步：打包和上传脚本
+
+**Prompt：**
+请生成一个 shell 脚本 scripts/publish.sh，用于：
+
+清理旧的构建文件（rm -rf dist/ build/ *.egg-info）
+
+安装 build 和 twine（如果未安装）
+
+构建包：python -m build
+
+上传到 PyPI：python -m twine upload dist/*
+
+提示用户输入 PyPI 账号密码
+
+同时生成一个 Windows 批处理版本 scripts/publish.bat。
+
+text
+
+---
+
+## 执行顺序
+
+| 步骤 | 做什么 | 时间 |
+|------|--------|------|
+| 1 | 复制 prompt 给 AI，得到目录结构脚本 | 1 分钟 |
+| 2 | 运行脚本，创建目录 | 1 分钟 |
+| 3 | 逐个复制 prompt 给 AI，获取文件内容 | 10 分钟 |
+| 4 | 把生成的内容保存到对应文件 | 5 分钟 |
+| 5 | 本地测试：`pip install -e .` | 2 分钟 |
+| 6 | 测试命令：`agi-autoposter-demo` | 1 分钟 |
+| 7 | 运行发布脚本，上传 PyPI | 2 分钟 |
+
+---
+
+把这些 prompt 依次发给 AI，每个回复保存成对应文件，然后跑 `./scripts/publish.sh` 就能发布到 PyPI 了。

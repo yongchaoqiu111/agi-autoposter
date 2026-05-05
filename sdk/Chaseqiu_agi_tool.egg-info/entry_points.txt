@@ -1,0 +1,2 @@
+[console_scripts]
+chaseqiu-agi-demo = agi_autoposter.cli:main
