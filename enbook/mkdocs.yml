@@ -2,6 +2,7 @@ site_name: "Three-Layer Architecture: Industrial-Grade AI Task Architecture"
 site_description: "Stability First x Controlled Execution x Atomic Composition"
 site_author: "Chaseqiu"
 site_url: "https://yongchaoqiu111.github.io/agi-autoposter/en/"
+use_directory_urls: true
 repo_url: "https://github.com/yongchaoqiu111/agi-autoposter"
 repo_name: "agi-autoposter"
 
