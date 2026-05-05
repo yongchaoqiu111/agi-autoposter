@@ -1,6 +1,7 @@
 site_name: "三层结构体：工业级 AI 任务架构"
 site_description: "稳定优先 × 可控执行 × 原子化组合"
 site_author: "Chaseqiu"
+site_url: "https://yongchaoqiu111.github.io/agi-autoposter/"
 repo_url: "https://github.com/yongchaoqiu111/agi-autoposter"
 repo_name: "agi-autoposter"
 
