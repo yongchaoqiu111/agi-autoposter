@@ -5,8 +5,6 @@ site_url: "https://yongchaoqiu111.github.io/agi-autoposter/en/"
 repo_url: "https://github.com/yongchaoqiu111/agi-autoposter"
 repo_name: "agi-autoposter"
 
-docs_dir: .
-
 theme:
   name: material
   language: en
