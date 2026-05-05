@@ -1,0 +1,75 @@
+site_name: "Three-Layer Architecture: Industrial-Grade AI Task Architecture"
+site_description: "Stability First x Controlled Execution x Atomic Composition"
+site_author: "Chaseqiu"
+repo_url: "https://github.com/yongchaoqiu111/agi-autoposter"
+repo_name: "agi-autoposter"
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.expand
+    - navigation.indexes
+    - navigation.top
+    - search.highlight
+    - search.share
+    - content.code.copy
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Roboto
+    code: Fira Code
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+
+nav:
+  - Home: index.md
+  - Preface: 00-preface.md
+  - Part I: The Problem:
+    - Chapter 1: The Evolution Myth: 01-chapter1.md
+    - Chapter 2: Why Existing Frameworks Are Unstable: 02-chapter2.md
+    - Chapter 3: What Industrial Systems Really Need: 03-chapter3.md
+  - Part II: Architecture:
+    - Chapter 4: Three-Layer Structure Definition: 04-chapter4.md
+    - Chapter 5: Atomic Characteristics: 05-chapter5.md
+    - Chapter 6: Clone Scheduling Mechanism: 06-chapter6.md
+    - Chapter 7: Composition Rules of Atoms: 07-chapter7.md
+    - Chapter 8: Supervision Layer: 08-chapter8.md
+    - Chapter 9: Layer-by-Layer Hallucination Filtering: 09-chapter9.md
+    - Chapter 10: Controlled Execution: 10-chapter10.md
+  - Part III: Boundaries:
+    - Chapter 11: Capability Boundaries: 11-chapter11.md
+    - Chapter 12: Comparison with Existing Frameworks: 12-chapter12.md
+    - Chapter 13: When to Use This Architecture: 13-chapter13.md
+  - Part IV: Implementation:
+    - Chapter 14: Current Stage: 14-chapter14.md
+    - Chapter 15: Production Deployment: 15-chapter15.md
+    - Chapter 16: Exploration Capability: 16-chapter16.md
+    - Chapter 17: Future of the Architecture: 17-chapter17.md
+  - Appendix: appendix.md
