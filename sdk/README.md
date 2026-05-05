@@ -3,6 +3,12 @@
 [![Python Version](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
+##  电子书
+
+**《三层结构体：工业级 AI 任务架构》**
+
+在线阅读：https://yongchaoqiu111.github.io/agi-autoposter/
+
 AI 驱动的多平台自动发帖系统，采用三层结构体组合架构：监督中间层 + 分身调度 + 监控反馈闭环。
 
 ## 架构
