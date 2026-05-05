@@ -32,12 +32,12 @@ jobs:
       - name: Build Chinese Site
         run: |
           cd book
-          mkdocs build --site-dir ../site
+          mkdocs build -f mkdocs.yml --site-dir ../site
 
       - name: Build English Site
         run: |
           cd enbook
-          mkdocs build --site-dir ../site/en
+          mkdocs build -f mkdocs.yml --site-dir ../site/en
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
