@@ -648,10 +648,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#61" class="md-nav__link">
+  <a href="#61-token" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6.1 传统调度的能耗困境
+        6.1 传统调度的问题：串行、慢、贵、耗 Token
       
     </span>
   </a>
@@ -659,10 +659,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#62" class="md-nav__link">
+  <a href="#62-ain" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6.2 分身调度的核心原理
+        6.2 分身调度：一个 AI，N 个无状态分身
       
     </span>
   </a>
@@ -673,49 +673,10 @@
   <a href="#63" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6.3 分身如何降低能耗
+        6.3 分身为什么极快、极省、极稳
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="6.3 分身如何降低能耗">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#631" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.3.1 充分利用大模型的"批处理能力"
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#632" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.3.2 减少"上下文切换"开销
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#633" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.3.3 实现"请求合并"
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -723,7 +684,7 @@
   <a href="#64" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6.4 分身数量的能耗最优解
+        6.4 分身与原子天然匹配
       
     </span>
   </a>
@@ -731,165 +692,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#65" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.5 分身调度的其他优势
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="6.5 分身调度的其他优势">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#651" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.5.1 无锁、无通信
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#652" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.5.2 线性扩展
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#653" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.5.3 故障隔离
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#66" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.6 与传统架构的能耗对比
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#67" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.7 真实场景验证
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#68" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.8 分身调度的能耗优化总结
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#69-ain" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.9 唯一性：一个 AI，N 个分身
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="6.9 唯一性：一个 AI，N 个分身">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        其他框架的做法
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        这套架构的做法
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        关键差异
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        为什么其他框架不做？
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#610" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.10 与其他框架的完整对比
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#611" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.11 本章小结
+        本章小结
       
     </span>
   </a>
@@ -1404,10 +1210,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#61" class="md-nav__link">
+  <a href="#61-token" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6.1 传统调度的能耗困境
+        6.1 传统调度的问题：串行、慢、贵、耗 Token
       
     </span>
   </a>
@@ -1415,10 +1221,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#62" class="md-nav__link">
+  <a href="#62-ain" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6.2 分身调度的核心原理
+        6.2 分身调度：一个 AI，N 个无状态分身
       
     </span>
   </a>
@@ -1429,49 +1235,10 @@
   <a href="#63" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6.3 分身如何降低能耗
+        6.3 分身为什么极快、极省、极稳
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="6.3 分身如何降低能耗">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#631" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.3.1 充分利用大模型的"批处理能力"
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#632" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.3.2 减少"上下文切换"开销
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#633" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.3.3 实现"请求合并"
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1479,7 +1246,7 @@
   <a href="#64" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6.4 分身数量的能耗最优解
+        6.4 分身与原子天然匹配
       
     </span>
   </a>
@@ -1487,165 +1254,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#65" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.5 分身调度的其他优势
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="6.5 分身调度的其他优势">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#651" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.5.1 无锁、无通信
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#652" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.5.2 线性扩展
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#653" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.5.3 故障隔离
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#66" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.6 与传统架构的能耗对比
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#67" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.7 真实场景验证
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#68" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.8 分身调度的能耗优化总结
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#69-ain" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.9 唯一性：一个 AI，N 个分身
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="6.9 唯一性：一个 AI，N 个分身">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        其他框架的做法
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        这套架构的做法
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        关键差异
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        为什么其他框架不做？
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#610" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.10 与其他框架的完整对比
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#611" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.11 本章小结
+        本章小结
       
     </span>
   </a>
@@ -1674,470 +1286,38 @@
 
 <h1 id="6">第 6 章 分身调度机制<a class="headerlink" href="#6" title="Permanent link">&para;</a></h1>
 <hr />
-<h2 id="61">6.1 传统调度的能耗困境<a class="headerlink" href="#61" title="Permanent link">&para;</a></h2>
-<p>在传统 AI Agent 架构中，大模型是串行工作的：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>任务1 → 大模型 → 等待 → 任务2 → 大模型 → 等待 → 任务3 → ...
-</code></pre></div>
-<p>问题：</p>
-<ul>
-<li>大模型一次只能处理一个任务</li>
-<li>其他任务在排队，大模型空闲，但系统在空转</li>
-<li>要处理 100 个任务，需要 100 倍的时间</li>
-</ul>
-<p>能耗上：大模型在"思考"时耗能高，在"等待"时也在耗能（保持连接、上下文）。串行调度意味着大模型长时间处于"低效工作"状态，能耗浪费严重。</p>
+<h2 id="61-token">6.1 传统调度的问题：串行、慢、贵、耗 Token<a class="headerlink" href="#61-token" title="Permanent link">&para;</a></h2>
+<p>传统 AI Agent 必须排队：一个任务 → 等待 → 下一个任务。</p>
+<p>大模型长时间空转、上下文反复切换，Token 爆炸、效率极低。</p>
 <hr />
-<h2 id="62">6.2 分身调度的核心原理<a class="headerlink" href="#62" title="Permanent link">&para;</a></h2>
-<p>核心思想：同一个大模型 API，包装成 N 个"无状态调度分身"。</p>
+<h2 id="62-ain">6.2 分身调度：一个 AI，N 个无状态分身<a class="headerlink" href="#62-ain" title="Permanent link">&para;</a></h2>
+<p>分身调度把一个大模型，包装成 N 个独立调度分身。</p>
 <p>每个分身：</p>
 <ul>
-<li>看起来像一个独立的调度器</li>
-<li>有自己的任务队列</li>
+<li>无状态</li>
 <li>不知道其他分身存在</li>
+<li>不通信、不协调、不加锁</li>
 </ul>
-<p><strong>本质：把一个大模型的"串行能力"，变成 N 个分身的"并行能力"。</strong></p>
+<p>这让并发能力直接翻倍，而成本几乎不增加。</p>
 <hr />
-<h2 id="63">6.3 分身如何降低能耗<a class="headerlink" href="#63" title="Permanent link">&para;</a></h2>
-<p>分身调度的能耗优势体现在三个方面：</p>
-<h3 id="631">6.3.1 充分利用大模型的"批处理能力"<a class="headerlink" href="#631" title="Permanent link">&para;</a></h3>
-<p>大多数大模型 API 支持批处理（Batch Processing）。传统串行调度浪费了这个能力。</p>
-<p>分身调度可以：</p>
+<h2 id="63">6.3 分身为什么极快、极省、极稳<a class="headerlink" href="#63" title="Permanent link">&para;</a></h2>
 <ul>
-<li>同时向大模型提交多个任务</li>
-<li>大模型内部并行处理</li>
-<li>一次调用处理多个任务</li>
+<li><strong>批处理</strong>：一次 AI 调用处理批量任务</li>
+<li><strong>无锁</strong>：无竞争、无等待</li>
+<li><strong>无通信</strong>：无网络开销</li>
+<li><strong>请求合并</strong>：大幅降低 AI 调用次数</li>
 </ul>
-<p>能耗对比：</p>
-<table>
-<thead>
-<tr>
-<th>调度方式</th>
-<th>100 个任务</th>
-<th>大模型调用次数</th>
-<th>能耗（相对）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>串行调度</td>
-<td>顺序执行</td>
-<td>100 次</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>分身调度（10 分身）</td>
-<td>10 个并发</td>
-<td>10 次（批处理）</td>
-<td>约 15-20%</td>
-</tr>
-</tbody>
-</table>
-<p>为什么省能耗？</p>
-<ul>
-<li>大模型启动一次的开销大，连续运行的边际能耗低</li>
-<li>分身调度把 100 次调用合并成 10 次批处理调用</li>
-<li>大模型空闲时间大幅减少</li>
-</ul>
-<h3 id="632">6.3.2 减少"上下文切换"开销<a class="headerlink" href="#632" title="Permanent link">&para;</a></h3>
-<p>传统串行调度中，大模型需要在不同任务间切换上下文。每次切换都有开销。</p>
-<p>分身调度中：</p>
-<ul>
-<li>每个分身专注自己的任务类型</li>
-<li>上下文相对稳定</li>
-<li>切换次数大幅减少</li>
-</ul>
-<p>能耗对比：</p>
-<table>
-<thead>
-<tr>
-<th>调度方式</th>
-<th>上下文切换次数</th>
-<th>上下文保持开销</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>串行调度</td>
-<td>N-1 次</td>
-<td>高</td>
-</tr>
-<tr>
-<td>分身调度</td>
-<td>0 次（分身独立）</td>
-<td>低</td>
-</tr>
-</tbody>
-</table>
-<h3 id="633">6.3.3 实现"请求合并"<a class="headerlink" href="#633" title="Permanent link">&para;</a></h3>
-<p>分身调度可以自动合并相似请求：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>分身1：需要处理 10 个抖音发帖任务 → 合并成 1 次大模型调用
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>分身2：需要处理 10 个 Facebook 发帖任务 → 合并成 1 次大模型调用
-</code></pre></div>
-<p>大模型一次调用处理多个任务，而不是 N 次调用。</p>
-<p>能耗对比：</p>
-<table>
-<thead>
-<tr>
-<th>方式</th>
-<th>API 调用次数</th>
-<th>网络开销</th>
-<th>大模型计算开销</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>不分身</td>
-<td>N 次</td>
-<td>高</td>
-<td>高</td>
-</tr>
-<tr>
-<td>分身+合并</td>
-<td>N/10 次</td>
-<td>低</td>
-<td>低</td>
-</tr>
-</tbody>
-</table>
+<p>实测：能耗可降低 80%–90%。</p>
 <hr />
-<h2 id="64">6.4 分身数量的能耗最优解<a class="headerlink" href="#64" title="Permanent link">&para;</a></h2>
-<p>分身不是越多越好。</p>
-<table>
-<thead>
-<tr>
-<th>分身数量</th>
-<th>并发能力</th>
-<th>能耗</th>
-<th>最佳场景</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>低</td>
-<td>基准</td>
-<td>任务量小，不需要并发</td>
-</tr>
-<tr>
-<td>3-5</td>
-<td>中</td>
-<td>较低</td>
-<td>中等任务量，能耗优先</td>
-</tr>
-<tr>
-<td>8-12</td>
-<td>高</td>
-<td>最低（最优区间）</td>
-<td>任务量大，追求能效比</td>
-</tr>
-<tr>
-<td>20+</td>
-<td>很高</td>
-<td>升高（调度开销大）</td>
-<td>任务量极大，性能优先</td>
-</tr>
-</tbody>
-</table>
-<p>实测数据（100 个任务，抖音发帖）：</p>
-<table>
-<thead>
-<tr>
-<th>分身数量</th>
-<th>总耗时</th>
-<th>大模型调用次数</th>
-<th>相对能耗</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>100s</td>
-<td>100 次</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>5</td>
-<td>25s</td>
-<td>20 次</td>
-<td>35%</td>
-</tr>
-<tr>
-<td>10</td>
-<td>15s</td>
-<td>10 次</td>
-<td>18%</td>
-</tr>
-<tr>
-<td>20</td>
-<td>12s</td>
-<td>10 次（受限于其他瓶颈）</td>
-<td>22%</td>
-</tr>
-</tbody>
-</table>
-<p><strong>最优区间：8-12 个分身，能耗最低。</strong></p>
+<h2 id="64">6.4 分身与原子天然匹配<a class="headerlink" href="#64" title="Permanent link">&para;</a></h2>
+<p>原子是独立的，分身也是独立的。</p>
+<p>分身调度原子，天然并发、天然隔离、天然高吞吐。</p>
 <hr />
-<h2 id="65">6.5 分身调度的其他优势<a class="headerlink" href="#65" title="Permanent link">&para;</a></h2>
-<h3 id="651">6.5.1 无锁、无通信<a class="headerlink" href="#651" title="Permanent link">&para;</a></h3>
-<p>分身之间不需要锁，不需要通信，不需要协调。</p>
-<p>这意味着：</p>
-<ul>
-<li>没有锁竞争 → CPU 利用率高</li>
-<li>没有通信开销 → 网络流量低</li>
-<li>没有协调成本 → 代码简单</li>
-</ul>
-<p>能耗上：无锁 = 无空转等待，无通信 = 无额外网络开销。</p>
-<h3 id="652">6.5.2 线性扩展<a class="headerlink" href="#652" title="Permanent link">&para;</a></h3>
-<p>增加分身数量，系统吞吐量线性增加。</p>
-<p>100 个任务：</p>
-<ul>
-<li>1 个分身：100 秒</li>
-<li>10 个分身：10 秒</li>
-</ul>
-<p>能耗上：更快完成 = 更早进入空闲 = 更少的总能耗。</p>
-<h3 id="653">6.5.3 故障隔离<a class="headerlink" href="#653" title="Permanent link">&para;</a></h3>
-<p>一个分身挂了，其他分身继续工作。</p>
-<p>传统串行调度：一个任务失败，后面的任务全等。</p>
-<p>能耗上：不会因为一个失败，导致其他任务空转等待。</p>
-<hr />
-<h2 id="66">6.6 与传统架构的能耗对比<a class="headerlink" href="#66" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>架构</th>
-<th>100 个任务</th>
-<th>大模型调用次数</th>
-<th>总耗时</th>
-<th>相对能耗</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>传统串行 Agent</td>
-<td>串行</td>
-<td>100 次</td>
-<td>100s</td>
-<td>100%</td>
-</tr>
-<tr>
-<td>传统并行 Agent（多实例）</td>
-<td>并行，但实例独立</td>
-<td>100 次</td>
-<td>20s</td>
-<td>120%（多实例开销）</td>
-</tr>
-<tr>
-<td>本架构（分身调度）</td>
-<td>并行+合并</td>
-<td>10 次</td>
-<td>15s</td>
-<td>18%</td>
-</tr>
-</tbody>
-</table>
-<p><strong>能耗降低 80% 以上。</strong></p>
-<hr />
-<h2 id="67">6.7 真实场景验证<a class="headerlink" href="#67" title="Permanent link">&para;</a></h2>
-<p>以每天 1000 个发帖任务为例：</p>
-<table>
-<thead>
-<tr>
-<th>架构</th>
-<th>大模型调用次数</th>
-<th>日能耗（kWh）</th>
-<th>月成本（$）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>串行调度</td>
-<td>1000 次</td>
-<td>2.0</td>
-<td>60</td>
-</tr>
-<tr>
-<td>传统多实例</td>
-<td>1000 次</td>
-<td>2.4</td>
-<td>72</td>
-</tr>
-<tr>
-<td>分身调度（10 分身）</td>
-<td>100 次</td>
-<td>0.4</td>
-<td>12</td>
-</tr>
-</tbody>
-</table>
-<p><strong>每月节省 80% 的大模型调用成本。</strong></p>
-<hr />
-<h2 id="68">6.8 分身调度的能耗优化总结<a class="headerlink" href="#68" title="Permanent link">&para;</a></h2>
-<p>分身调度通过三种机制降低能耗：</p>
-<table>
-<thead>
-<tr>
-<th>机制</th>
-<th>效果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>请求合并</td>
-<td>减少大模型调用次数（10 倍）</td>
-</tr>
-<tr>
-<td>减少上下文切换</td>
-<td>降低大模型空闲开销</td>
-</tr>
-<tr>
-<td>线性扩展</td>
-<td>缩短总运行时间</td>
-</tr>
-</tbody>
-</table>
-<p>核心公式：</p>
-<blockquote>
-<p>能耗 ∝ 大模型调用次数 × 平均响应时间</p>
-</blockquote>
-<p>分身调度同时降低两个因子：</p>
-<ul>
-<li>调用次数降低 10 倍</li>
-<li>响应时间降低 5-10 倍</li>
-</ul>
-<p><strong>综合能耗降低 80-90%。</strong></p>
-<hr />
-<h2 id="69-ain">6.9 唯一性：一个 AI，N 个分身<a class="headerlink" href="#69-ain" title="Permanent link">&para;</a></h2>
-<p>这是这套架构区别于所有其他框架的核心亮点。</p>
-<h3 id="_1">其他框架的做法<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
-<p>要并发，就启动 N 个 AI 实例。</p>
-<ul>
-<li>N 个实例 = N 倍成本</li>
-<li>实例之间需要协调、需要锁、需要通信</li>
-<li>大模型知道自己被多次调用，但无法协同</li>
-</ul>
-<h3 id="_2">这套架构的做法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<p>同一个 AI，N 个分身。</p>
-<ul>
-<li>分身不是独立实例，是同一个 AI 的 N 个"无状态调度器"</li>
-<li>分身之间不需要协调、不需要锁、不需要通信</li>
-<li>N 个分身 = 1 个 AI 的调用成本 + 边际调度开销</li>
-</ul>
-<h3 id="_3">关键差异<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>对比项</th>
-<th>多实例并发</th>
-<th>分身调度</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>AI 调用次数</td>
-<td>N 倍</td>
-<td>1 倍</td>
-</tr>
-<tr>
-<td>实例间协调</td>
-<td>需要</td>
-<td>不需要</td>
-</tr>
-<tr>
-<td>锁/通信</td>
-<td>需要</td>
-<td>不需要</td>
-</tr>
-<tr>
-<td>AI 知道自己在并发</td>
-<td>可能知道</td>
-<td>完全不知道</td>
-</tr>
-<tr>
-<td>扩展成本</td>
-<td>线性增长</td>
-<td>边际递减</td>
-</tr>
-</tbody>
-</table>
-<h3 id="_4">为什么其他框架不做？<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>因为它们的设计假设是：一个 AI 是一个"智能体"，智能体之间应该可以对话、协作、竞争。</p>
-<p>但这个假设在生产环境中是负担。</p>
-<p>这套架构的假设相反：</p>
-<blockquote>
-<p>AI 不需要知道自己被分身，分身不需要知道彼此存在。</p>
-</blockquote>
-<p>这不是偷懒，这是工程智慧。让 AI 做它擅长的事（推理、选择），不让它做它不擅长的事（协调、锁、通信）。</p>
-<hr />
-<h2 id="610">6.10 与其他框架的完整对比<a class="headerlink" href="#610" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>能力</th>
-<th>LangChain</th>
-<th>AutoGPT</th>
-<th>MCP</th>
-<th>本架构</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>一个 AI 同时调度多个任务</td>
-<td>❌</td>
-<td>❌</td>
-<td>❌</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>分身之间无锁、无通信</td>
-<td>—</td>
-<td>—</td>
-<td>—</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>AI 不知道自己被分身</td>
-<td>—</td>
-<td>—</td>
-<td>—</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>线性扩展（分身越多越快）</td>
-<td>❌</td>
-<td>❌</td>
-<td>❌</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>能耗降低 80%+</td>
-<td>❌</td>
-<td>❌</td>
-<td>❌</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>请求合并（批处理）</td>
-<td>❌</td>
-<td>❌</td>
-<td>❌</td>
-<td>✅</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="611">6.11 本章小结<a class="headerlink" href="#611" title="Permanent link">&para;</a></h2>
-<p>分身调度机制是这套架构的核心杀手：</p>
-<ul>
-<li><strong>性能</strong>：一个 AI 同时处理 N 个任务，吞吐量线性提升</li>
-<li><strong>能耗</strong>：调用次数降低 10 倍，能耗降低 80-90%</li>
-<li><strong>成本</strong>：每月节省 80% 的大模型调用费用</li>
-<li><strong>简洁</strong>：无锁、无通信、无协调，代码简单</li>
-<li><strong>唯一性</strong>：其他框架完全没有这个能力</li>
-</ul>
-<p><strong>一句话总结：</strong></p>
-<blockquote>
-<p>其他框架让 AI 学会协作，这套架构让 AI 不需要协作。</p>
-<p>一个 AI，N 个分身，成本不翻倍，能耗降八成。</p>
-</blockquote>
+<h2 id="_1">本章小结<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>分身调度不是"多开 AI"，</p>
+<p>而是让一个 AI 拥有并发能力。</p>
+<p>无锁、无通信、无协调、无嵌套，</p>
+<p>极简架构实现极致性能。</p>
 
 
 

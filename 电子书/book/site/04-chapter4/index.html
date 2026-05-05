@@ -1287,75 +1287,46 @@
 <h1 id="4">第 4 章 三层结构体定义<a class="headerlink" href="#4" title="Permanent link">&para;</a></h1>
 <hr />
 <h2 id="41-id">4.1 内容层：只输出 ID<a class="headerlink" href="#41-id" title="Permanent link">&para;</a></h2>
-<p>内容层不输出"内容"，只输出"内容 ID"。</p>
-<p>为什么？因为大模型不能编造内容。它只能从已有的内容库里选。</p>
-<p>所以内容层的职责是：</p>
-<ul>
-<li>存储内容（文案、图片、视频）</li>
-<li>为每个内容分配唯一 ID</li>
-<li>对外只暴露 ID</li>
-</ul>
-<p>大模型看到的是："文案 ID 5"，不是"一段关于 AI 的文案"。</p>
-<p><strong>不给编造空间。</strong></p>
+<p>内容层不输出真实内容，只输出内容 ID。</p>
+<p>它的职责只有三件：存储内容、分配唯一 ID、对外只暴露 ID。</p>
+<p>大模型看不到原文、原图、原视频，只能看到 content_id=5 这类索引。</p>
+<p>不给编造空间，从源头切断幻觉。</p>
 <hr />
 <h2 id="42-id">4.2 调度层：只选 ID<a class="headerlink" href="#42-id" title="Permanent link">&para;</a></h2>
-<p>调度层由大模型驱动，但它只做一件事：选择 ID。</p>
+<p>调度层由大模型驱动，但它不创造、不执行、不探索。</p>
+<p>它只做一件事：从白名单里选择 ID。</p>
 <ul>
-<li>它不编造平台，只从已有平台列表里选</li>
-<li>它不编造文案，只从已有内容 ID 里选</li>
-<li>它不编造时间，只从设定好的时间段里选</li>
+<li>不编造平台</li>
+<li>不编造内容</li>
+<li>不编造参数</li>
+<li>不实时解析网页</li>
+<li>不运行浏览器</li>
 </ul>
-<p><strong>不给幻觉机会。</strong></p>
+<p>调度层越轻，系统越稳、越快、越省 Token。</p>
 <hr />
 <h2 id="43">4.3 执行层：只认参数<a class="headerlink" href="#43" title="Permanent link">&para;</a></h2>
-<p>执行层不判断"该不该发"，只负责"怎么发"。</p>
-<p>它接收参数：平台、文案 ID、图片 ID。然后登录、发帖、返回结果。</p>
-<p>它不判断：这个平台今天能不能发？这个文案是不是违规？这个时间合不合适？</p>
-<p><strong>只认参数，不判断对错。</strong></p>
+<p>执行层是纯脚本、纯固定逻辑、无智能。</p>
+<p>它只做一件事：按参数执行。</p>
+<p>执行层不思考、不决策、不校验该不该做，</p>
+<p>只保证：给什么参数，做什么动作。</p>
+<p>这是大规模、高并发、低成本的唯一正确结构。</p>
 <hr />
 <h2 id="44">4.4 监督层：只记录真相<a class="headerlink" href="#44" title="Permanent link">&para;</a></h2>
-<p>监督层不干预执行，不修改任务，不做决策。</p>
-<p>它只做三件事：</p>
-<ol>
-<li>记录所有任务的状态（成功、失败、超时）</li>
-<li>记录所有任务的结果（URL、错误信息）</li>
-<li>提供查询接口（供调度层学习）</li>
-</ol>
-<p><strong>不玩花样，只说真话。</strong></p>
+<p>监督层不干预、不阻塞、不实时校验。</p>
+<p>它只记录事实：成功、失败、耗时、错误、结果。</p>
+<p>监督层是系统的记忆，</p>
+<p>不是系统的警察。</p>
+<p>它提供真相，不做审判。</p>
 <hr />
 <h2 id="_1">本章小结<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>层级</th>
-<th>职责</th>
-<th>核心原则</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>内容层</td>
-<td>存储内容，输出 ID</td>
-<td>不给编造空间</td>
-</tr>
-<tr>
-<td>调度层</td>
-<td>大模型选择 ID</td>
-<td>不给幻觉机会</td>
-</tr>
-<tr>
-<td>执行层</td>
-<td>执行具体操作</td>
-<td>只认参数，不判断对错</td>
-</tr>
-<tr>
-<td>监督层</td>
-<td>记录状态，提供查询</td>
-<td>只说真话</td>
-</tr>
-</tbody>
-</table>
-<p>三层结构体 = 内容层 + 调度层 + 执行层 + 监督层</p>
+<p>三层结构的核心是彻底解耦：</p>
+<ul>
+<li><strong>内容层</strong>：提供 ID</li>
+<li><strong>调度层</strong>：选择 ID</li>
+<li><strong>执行层</strong>：执行 ID</li>
+<li><strong>监督层</strong>：记录结果</li>
+</ul>
+<p>每一层只做自己的事，不侵入、不混合、不嵌套。</p>
 
 
 

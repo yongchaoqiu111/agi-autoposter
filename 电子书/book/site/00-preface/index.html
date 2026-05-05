@@ -301,24 +301,6 @@
         
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    序言
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -335,47 +317,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        本书定位
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        配套开源项目
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -1170,36 +1111,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        本书定位
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        配套开源项目
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -1218,48 +1129,22 @@
   
 
 
-<h1 id="_1">序言：为什么你需要这套架构<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>当前，AI Agent 框架层出不穷。LangChain、AutoGPT、BabyAGI、MCP……它们都在追求一件事：让 AI "进化"出最优解。</p>
-<p>这个方向没有错，但它忽略了一个根本问题：</p>
-<p><strong>工业级系统需要的不是"可能性"，而是"确定性"。</strong></p>
-<p>一个会自己尝试、自己犯错、自己进化的系统，在实验室里很酷，但在生产环境里就是灾难。</p>
-<p>品牌账号发错一条内容，损失的是信任；金融系统执行错一笔交易，损失的是真金白银；医疗系统给错一个建议，损失的是生命。</p>
-<p>这些东西，不能"进化"。</p>
-<p>本书提出一套完全不同的架构：</p>
-<ul>
-<li>不追求"自动进化"</li>
-<li>不追求"最优解"</li>
-<li>不追求"自适应"</li>
-</ul>
-<p>而是追求：</p>
-<ul>
-<li><strong>稳定优先</strong>：宁可慢，不可错</li>
-<li><strong>可控执行</strong>：每一步都可预测、可追溯</li>
-<li><strong>原子化组合</strong>：小单元独立运行，大系统自由组合</li>
-</ul>
-<p>这套架构叫 <strong>"三层结构体"</strong>。</p>
-<p>它的核心思想很简单：</p>
-<blockquote>
-<p>把大模型的"幻想力"，关进工业级架构的笼子里。</p>
-</blockquote>
-<hr />
-<h2 id="_2">本书定位<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>本书介绍的架构，目前处于 <strong>"实验室验证"</strong>阶段。</p>
-<p>它已经能稳定运行，但还需要更多场景、更多 Worker、更多用户的检验。</p>
-<p>如果你想直接"开箱即用"，可能还需要再等一段时间。</p>
-<p>但如果你想理解一套 <strong>"稳定优先的 AI 任务架构"</strong> 是怎么设计的，这本书就是为你写的。</p>
-<hr />
-<h2 id="_3">配套开源项目<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>本书所有架构思想，均有开源实现作为参考验证。</p>
-<p>一键安装：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>Chaseqiu-agi-tool
-</code></pre></div>
-<p>GitHub 仓库：
-https://github.com/yongchaoqiu111/agi-autoposter</p>
-<p>快速体验：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>agi-autoposter-demo
-</code></pre></div>
-<p>这是一个三层结构体的最小实现，用来证明这套架构能跑、能落地。欢迎开发者试用、改造、反馈。</p>
+<h1 id="_1">序言<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>当下人工智能赛道，正一股脑涌向大模型自主规划、无限探索、全自动自进化的方向。</p>
+<p>很多框架、很多理念，都在默认一个前提：让 AI 越来越聪明、越来越自治，逐步替代人类做决策、做迭代、做自我演化。</p>
+<p>但站在工程落地与文明长远的视角，我始终保持一份清醒：</p>
+<p><strong>智能可以进步，边界不能消失；效率可以提升，主导不能让渡。</strong></p>
+<p>我撰写本书、设计这套原子化三层架构，初衷并不只是为了解决 AI 任务调度、大模型幻觉治理、大规模高并发运转、Token 成本居高不下等工程难题。</p>
+<p>更深层的初心，是想给 AI 时代建立一套可控、可约束、可止损、可守住人类主动权的底层运行规则。</p>
+<p>大模型可以负责探索、尝试、生成、辅助执行，但不能拥有无边界的自主进化权限。</p>
+<p>是否允许迭代、该不该继续探索、要不要固化成标准流程、什么时候停止试错，最终的核验权、决策权、进化开关，必须永远留在人类手中。</p>
+<p>放任 AI 无限制黑盒演进，本质上是把人类文明推向不可预知、无法掌控的未知地带。</p>
+<p>而本书提出的架构思想，就是给大模型运行装上边界、隔离层、刹车机制与透明监督机制：</p>
+<p>不让大模型跳出可控框架，不让黑盒吞没人类的判断与选择权。</p>
+<p>我始终坚信一条朴素且坚定的原则：</p>
+<p><strong>技术可以向前狂奔，人类不能向后退位。</strong></p>
+<p>顺着「人做最终主宰、AI 只做辅助」的路径稳健发展，未来一百年，人类依然能稳稳守住自身的位置、守住理性、守住文明的主导权。</p>
+<p>这不是空想愿景，而是一套完全可落地、可工程化、可长期坚守的 AI 安全生存路径。</p>
 
 
 

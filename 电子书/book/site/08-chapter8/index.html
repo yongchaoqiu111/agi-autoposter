@@ -790,7 +790,18 @@
   <a href="#86" class="md-nav__link">
     <span class="md-ellipsis">
       
-        8.6 为什么监督层是"稳定性的核心"
+        8.6 为什么监督层是稳定性的核心
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#87" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.7 契约思想的吸收与场景化取舍
       
     </span>
   </a>
@@ -1346,7 +1357,18 @@
   <a href="#86" class="md-nav__link">
     <span class="md-ellipsis">
       
-        8.6 为什么监督层是"稳定性的核心"
+        8.6 为什么监督层是稳定性的核心
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#87" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.7 契约思想的吸收与场景化取舍
       
     </span>
   </a>
@@ -1394,11 +1416,11 @@
 <p>一个独立于调度层、执行层之外的、只负责"记录真相"的模块。</p>
 </blockquote>
 <p>它不干预执行，不修改任务，不做决策。它只做三件事：</p>
-<ol>
+<ul>
 <li><strong>记录</strong>：每个任务从创建到完成的完整生命周期</li>
 <li><strong>存储</strong>：成功案例、失败案例、超时案例、错误原因</li>
 <li><strong>查询</strong>：提供接口，让调度层（大模型）可以查询历史数据</li>
-</ol>
+</ul>
 <hr />
 <h2 id="82">8.2 监督层的核心数据<a class="headerlink" href="#82" title="Permanent link">&para;</a></h2>
 <p>监督层记录以下信息：</p>
@@ -1434,7 +1456,7 @@
 <tr>
 <td>result</td>
 <td>执行结果</td>
-<td>url=https://douyin.com/xxx</td>
+<td>url= <code>https://douyin.com/xxx</code></td>
 </tr>
 <tr>
 <td>duration_ms</td>
@@ -1459,30 +1481,25 @@
 <p>监督层支持两种运行模式。</p>
 <h3 id="stable-mode">严格模式（Stable Mode）<a class="headerlink" href="#stable-mode" title="Permanent link">&para;</a></h3>
 <p>默认模式。</p>
-<p><strong>行为：</strong>
-- 调度层只能选择历史上验证过的（平台、文案、时间）
-- 新尝试需要人工批准
-- 系统优先保证"不出错"</p>
-<p><strong>适用场景：</strong>
-- 品牌账号运营（不能发错内容）
-- 金融、医疗等高合规领域
-- 任何"出错成本极高"的场景</p>
+<ul>
+<li>调度层只能选择历史上验证过的（平台、文案、时间）</li>
+<li>新尝试需要人工批准</li>
+<li>系统优先保证"不出错"</li>
+</ul>
+<p><strong>适用场景：</strong></p>
+<p>品牌账号运营、金融医疗等高合规领域、出错成本极高的场景。</p>
 <h3 id="explore-mode">探索模式（Explore Mode）<a class="headerlink" href="#explore-mode" title="Permanent link">&para;</a></h3>
 <p>需要明确授权才能开启。</p>
-<p><strong>行为：</strong>
-- 监督层记录所有结果（成功+失败）
-- 调度层可以尝试新组合
-- 系统可以从失败中学习</p>
-<p><strong>适用场景：</strong>
-- A/B 测试
-- 增长实验
-- 低风险场景</p>
-<p><strong>重要：探索模式的结果不会被自动采纳为"默认策略"。只有人工确认后，才能进入严格模式的白名单。</strong></p>
+<ul>
+<li>监督层记录所有结果（成功 + 失败）</li>
+<li>调度层可以尝试新组合</li>
+<li>系统可以从失败中学习</li>
+</ul>
+<p><strong>重要：</strong></p>
+<p>探索模式的结果不会被自动采纳为"默认策略"。只有人工确认后，才能进入严格模式的白名单。</p>
 <hr />
 <h2 id="84">8.4 监督层如何支持"自进化"<a class="headerlink" href="#84" title="Permanent link">&para;</a></h2>
-<p>很多人会问：监督层只记录，不分析，那系统怎么进步？</p>
-<p>答案是：监督层不负责进步，它只负责提供进步的"原材料"。</p>
-<p>进步的链条是这样的：</p>
+<p>监督层不负责进步，它只负责提供进步的"原材料"。</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>执行层尝试新东西
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    ↓
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>监督层记录结果（无论成败）
@@ -1496,13 +1513,26 @@
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>执行层按新策略执行
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    ↓
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>监督层记录新结果
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    ↓
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>（循环）
 </code></pre></div>
 <p>监督层不做判断，它只说真话。判断和进步，交给调度层。</p>
+<p>这套架构表面上不追求 AI 自主进化，却以最低成本、最安全、最可控的方式，实现了真正意义上的局部进化。</p>
+<p>进化不是让 AI 无限试错、自动改写系统，而是：</p>
+<ul>
+<li>探索型原子负责小范围尝试</li>
+<li>监督层负责记录事实</li>
+<li>人类负责判断是否"满意"</li>
+<li>一旦满意，就固化为执行型原子，不再变动</li>
+</ul>
+<p>这种进化不冒险、不失控、不破坏稳定：</p>
+<ul>
+<li>只进化局部，不影响全局；</li>
+<li>只进化确定部分，不动摇系统根基；</li>
+<li>进化代价极小，而收益极大。</li>
+</ul>
+<p>它不是 AI 的自进化，而是人类主导、AI 辅助、架构保障的安全进化。</p>
 <hr />
 <h2 id="85-api">8.5 监督层的 API 接口<a class="headerlink" href="#85-api" title="Permanent link">&para;</a></h2>
-<p>监督层对外暴露以下查询接口，供调度层使用：</p>
+<p>监督层对外暴露查询接口，供调度层使用：</p>
 <table>
 <thead>
 <tr>
@@ -1530,10 +1560,9 @@
 </tbody>
 </table>
 <p>这些接口返回的是事实，不是建议。</p>
-<p>调度层（大模型）拿到事实后，自己决定怎么调整策略。</p>
 <hr />
-<h2 id="86">8.6 为什么监督层是"稳定性的核心"<a class="headerlink" href="#86" title="Permanent link">&para;</a></h2>
-<p>因为如果没有监督层：</p>
+<h2 id="86">8.6 为什么监督层是稳定性的核心<a class="headerlink" href="#86" title="Permanent link">&para;</a></h2>
+<p>如果没有监督层：</p>
 <ul>
 <li>你不知道任务成功还是失败</li>
 <li>你不知道失败原因</li>
@@ -1543,6 +1572,20 @@
 </ul>
 <p>监督层把"黑盒"变成了"白盒"。</p>
 <p>它不是让系统更聪明，而是让系统更透明、更可控、更可信任。</p>
+<hr />
+<h2 id="87">8.7 契约思想的吸收与场景化取舍<a class="headerlink" href="#87" title="Permanent link">&para;</a></h2>
+<p>近期阅读一篇关于 AI 编码代理的契约式设计文章（<em>Your Coding Agent Doesn't Need a Better Prompt. It Needs a Contract</em>）带来不少启发。文章提出：与其不断优化提示词，不如为代理定义可测试、可校验的行为契约，明确输出结构、边界与禁止行为，从源头避免行为静默漂移。这套思路在小规模、高合规、可控优先的场景中表现极为优秀。</p>
+<p>但在面向百万级原子、大规模高并发的三层架构中，我们需要务实取舍：</p>
+<p>契约思想值得吸收，但实时、事前、全程阻塞的校验模式并不适用。若监督层实时介入每一步执行，会成为性能瓶颈，违背原子独立、故障隔离、高效扩展的原则。</p>
+<p>因此我们的设计决策是：</p>
+<ul>
+<li><strong>吸收</strong>契约的标准价值，将其作为行为边界与审计依据；</li>
+<li><strong>放弃</strong>实时校验模式，改为事后审计、按需触发。</li>
+</ul>
+<p><strong>小规模场景</strong>：可启用事前强契约，保证绝对可控。</p>
+<p><strong>大规模场景</strong>：监督层保持轻量运行，执行结束后再校验，出错只影响单个原子。</p>
+<p>契约不是永远在线的监控，而是一套可伸缩的判断依据。</p>
+<p>我们尊重不同方案在各自场景下的优秀，同时坚持在对应规模下做最合理的取舍 —— 这不是妥协，而是架构真正成熟的标志。</p>
 <hr />
 <h2 id="_1">本章小结<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <table>
